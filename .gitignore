@@ -1,0 +1,18 @@
+/.vscode/
+
+#sample songs
+/wavs/
+*.wav
+*.mp3
+
+*.o
+run
+NOTES
+main.cpp
+
+#data dumps
+*.csv
+
+
+/Tests
+/Tests/*
