@@ -3,7 +3,7 @@
 #define _TONE_H_
 
 #include <string>
-#include "Effect.hpp"
+#include "../Effect.hpp"
 
 #define TWOPI 6.283185307
 

@@ -31,7 +31,7 @@ Device::Device(
         printf("Error opening device %s\n", snd_strerror(error_code));
     }
     
-    error_code = this->set_hw_params(_access_type);
+    error_code = this->set_hw_params();
     if(error_code > 0){
         printf("Error opening device %s\n", snd_strerror(error_code));
     }
@@ -52,7 +52,7 @@ Device::~Device(){
 	}
 }
 
-int Device::set_hw_params( snd_pcm_access_t _access_type){
+int Device::set_hw_params(){
 
     int error_code = 0;
     unsigned int temp_rate;
@@ -75,7 +75,7 @@ int Device::set_hw_params( snd_pcm_access_t _access_type){
     }
 
     //set interleaved read format
-    error_code = snd_pcm_hw_params_set_access(this->handle, this->hw_params, _access_type);
+    error_code = snd_pcm_hw_params_set_access(this->handle, this->hw_params, this->access_type);
     if (error_code < 0) {
             printf("Access type not available for playback: %s\n", snd_strerror(error_code));
             return error_code;

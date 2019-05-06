@@ -42,13 +42,16 @@ public:
 
     ~Device();
 
-    int set_hw_params(snd_pcm_access_t _access_type);
-    int set_sw_params();
-    
+
+
     int writeSamples(short *samples, int N);
 
 private:
+
     
+    int set_hw_params();
+    int set_sw_params();
+
     std::string device;
     snd_pcm_format_t audio_format;
     unsigned int channels;

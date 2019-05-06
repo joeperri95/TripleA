@@ -2,7 +2,7 @@
 #ifndef _TRACK_H_
 #define _TRACK_H_
 
-#include "Tone.hpp"
+#include "Tones/Tone.hpp"
 #include "Device.hpp"
 
 

@@ -1,10 +1,11 @@
 
 CC = g++
 CFLAGS = -Wall --std=c++11 
-SRC = main.cpp Device.cpp Sine.cpp Track.cpp Tone.cpp 
-OBJECTS = $(patsubst %.cpp,%.o,$(SRC))
+SRC = main.cpp Device.cpp Tones/Sine.cpp Track.cpp Tones/Tone.cpp 
+OBJDIR = ./obj
+OBJECTS = $(patsubst %.cpp, $(OBJDIR)/%.o,$(SRC))
 EXECUTABLE = run
-DEPS = Device.hpp Sine.hpp Tone.hpp Track.hpp
+DEPS = Device.hpp Tones/Sine.hpp Tones/Tone.hpp Track.hpp
 
 ALSA = $(shell pkg-config --cflags --libs alsa)
 
@@ -17,10 +18,10 @@ debug: $(OBJECTS)
 	$(CC) $(OBJECTS) -o debug -g $(CFLAGS) $(LIBS) $(ALSA)
  
 
-%.o: %.cpp $(DEPS)
-	$(CC) $(SRC) $(CFLAGS) -c
+$(OBJDIR)/%.o: %.cpp $(DEPS)
+	$(CC) $(CFLAGS) -c -o $@ $<
 
 .PHONY: clean
 
 clean: 
-	rm -f $(EXECUTABLE) $(wildcard *.o) debug
+	rm -f $(EXECUTABLE) $(wildcard *.o) debug a.csv $(wildcard $(OBJDIR)/*.o) $(wildcard $(OBJDIR)/Tones/*.o)  
