@@ -1,11 +1,11 @@
 
 CC = g++
 CFLAGS = -Wall --std=c++11 
-SRC = main.cpp Device.cpp Tones/Sine.cpp Track.cpp Tones/Tone.cpp 
+SRC = main.cpp Device.cpp Tones/Sine.cpp Track.cpp Tones/Tone.cpp Effects/DecayEffect.cpp
 OBJDIR = ./obj
 OBJECTS = $(patsubst %.cpp, $(OBJDIR)/%.o,$(SRC))
 EXECUTABLE = run
-DEPS = Device.hpp Tones/Sine.hpp Tones/Tone.hpp Track.hpp
+DEPS = Device.hpp Tones/Sine.hpp Tones/Tone.hpp Track.hpp Effects/Effect.hpp Effects/DecayEffect.hpp
 
 ALSA = $(shell pkg-config --cflags --libs alsa)
 
@@ -24,4 +24,4 @@ $(OBJDIR)/%.o: %.cpp $(DEPS)
 .PHONY: clean
 
 clean: 
-	rm -f $(EXECUTABLE) $(wildcard *.o) debug a.csv $(wildcard $(OBJDIR)/*.o) $(wildcard $(OBJDIR)/Tones/*.o)  
+	rm -f $(EXECUTABLE) $(wildcard *.o) debug a.csv $(wildcard $(OBJDIR)/*.o) $(wildcard $(OBJDIR)/Tones/*.o) $(wildcard $(OBJDIR)/Effects/*.o)

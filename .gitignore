@@ -5,14 +5,19 @@
 *.wav
 *.mp3
 
+#built objects
 *.o
+/obj
 run
+
+
 NOTES
-main.cpp
+NOTES.md
+
 
 #data dumps
 *.csv
 
-
+main.cpp
 /Tests
 /Tests/*

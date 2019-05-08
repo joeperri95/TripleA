@@ -26,11 +26,13 @@ Device::Device(
     this->period_event = _period_event;
     this->access_type = _access_type;
     
-    int error_code = snd_pcm_open(&this->handle, this->device.c_str(), SND_PCM_STREAM_PLAYBACK, 0);
+    
+
+    int error_code = snd_pcm_open(&(this->handle), this->device.c_str(), SND_PCM_STREAM_PLAYBACK, 0);
     if(error_code > 0){
         printf("Error opening device %s\n", snd_strerror(error_code));
     }
-    
+
     error_code = this->set_hw_params();
     if(error_code > 0){
         printf("Error opening device %s\n", snd_strerror(error_code));
@@ -45,8 +47,11 @@ Device::Device(
 
 Device::~Device(){
 	
+    int error_code;
+
 	if(snd_pcm_state(this->handle) == SND_PCM_STATE_OPEN){
-    	int error_code = snd_pcm_close(this->handle);
+        
+        error_code = snd_pcm_close(this->handle);
 		if(error_code < 0)
     		printf("error: %s\n", snd_strerror(error_code));
 	}
@@ -192,7 +197,6 @@ int Device::writeSamples(short *samples, int N){
     int a, b;
     int error_code = 0;
     short* ptr = samples;
-    
     
     a = this->period_size;
     b = N;

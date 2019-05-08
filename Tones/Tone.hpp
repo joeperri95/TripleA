@@ -3,9 +3,11 @@
 #define _TONE_H_
 
 #include <string>
-#include "../Effect.hpp"
+#include "../Effects/Effect.hpp"
 
+#ifndef TWOPI
 #define TWOPI 6.283185307
+#endif
 
 class Tone{
 
@@ -14,7 +16,7 @@ public:
     Tone();
     ~Tone();
 
-    void applyEffect(Effect e);
+    void applyEffect(Effect &e);
     void setAmplitude(double amplitude);
     
     unsigned int getSampleRate();
@@ -22,7 +24,7 @@ public:
     unsigned int getNumSamples();
     double getDuration();
     
-    short *getSamples();
+    virtual short *getSamples();
 
 protected:
 

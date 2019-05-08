@@ -5,6 +5,7 @@
 #include "Tone.hpp"
 #include <math.h>
 #include <memory.h>
+#include <iostream>
 
 class Sine : public Tone {
 
@@ -16,6 +17,7 @@ public:
         double freq);
     
     ~Sine();
+    
     short *getSamples();
 
 private:
