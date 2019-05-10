@@ -1,11 +1,11 @@
 
 CC = g++
 CFLAGS = -Wall --std=c++11 
-SRC = main.cpp Device.cpp Tones/Square.cpp Tones/Sine.cpp Track.cpp Tones/Tone.cpp Tones/PCMTone.cpp Effects/DecayEffect.cpp
+SRC = main.cpp Device.cpp Tones/Square.cpp Tones/Sine.cpp Track.cpp Tones/Tone.cpp Tones/PCMTone.cpp Effects/DecayEffect.cpp Tones/Triangle.cpp
 OBJDIR = ./obj
 OBJECTS = $(patsubst %.cpp, $(OBJDIR)/%.o,$(SRC))
 EXECUTABLE = run
-DEPS = Device.hpp Tones/Sine.hpp Tones/Tone.hpp Track.hpp Tones/PCMTone.hpp Effects/Effect.hpp Effects/DecayEffect.hpp Tones/Square.hpp
+DEPS = Device.hpp Tones/Sine.hpp Tones/Tone.hpp Track.hpp Tones/PCMTone.hpp Effects/Effect.hpp Effects/DecayEffect.hpp Tones/Square.hpp Tones/Triangle.hpp
 
 ALSA = $(shell pkg-config --cflags --libs alsa)
 
