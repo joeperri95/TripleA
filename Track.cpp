@@ -21,7 +21,9 @@ Track::Track(unsigned int sampleRate, unsigned int channels){
 
 
 Track::~Track(){
+
     free(this->buffer);
+    
 }
 
 
@@ -56,7 +58,6 @@ void Track::addTone(Tone &t, double startTime){
             *(this->buffer + i) = *(tonebuffer + i);
         }
 
-        free(tonebuffer);
     }
 
     else{

@@ -3,6 +3,7 @@
 #define _TONE_H_
 
 #include <string>
+#include <stdlib.h>
 #include "../Effects/Effect.hpp"
 
 #ifndef TWOPI
@@ -24,7 +25,7 @@ public:
     unsigned int getNumSamples();
     double getDuration();
     
-    virtual short *getSamples();
+    short *getSamples();
 
 protected:
 

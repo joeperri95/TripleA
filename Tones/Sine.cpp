@@ -9,8 +9,6 @@ Sine::Sine(unsigned int sampleRate, unsigned int channels, double duration, doub
     this->amplitude = amplitude;
     this->numSamples = (unsigned int) duration * sampleRate * channels; 
 
-    std::cout << this->numSamples << std::endl;
-
     this->samples = (short *) malloc(this->numSamples * sizeof(short));
     this->frequency = freq;
 
@@ -23,10 +21,7 @@ Sine::Sine(unsigned int sampleRate, unsigned int channels, double duration, doub
 }
 
 short *Sine::getSamples(){
-    short *copy = (short *) malloc(this->numSamples * sizeof(short));
-    memcpy(copy, this->samples, this->numSamples * sizeof(short));
-    return copy;
-
+    return this->samples;
 }
 
 Sine::~Sine(){

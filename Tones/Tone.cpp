@@ -21,7 +21,9 @@ unsigned int Tone::getSampleRate(){
     return this->sampleRate;
 }
 
-short *Tone::getSamples(){return NULL;}
+short *Tone::getSamples(){
+    return this->samples;
+}
 
 double Tone::getDuration(){
     return this->duration;

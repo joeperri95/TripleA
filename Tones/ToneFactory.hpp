@@ -1,7 +1,10 @@
 
 
 #include "Tone.hpp"
+#include "PCMTone.hpp"
 #include <string>
+#include <fstream>
+#include <iostream>
 
 class ToneFactory{
 

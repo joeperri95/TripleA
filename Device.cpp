@@ -48,13 +48,14 @@ Device::Device(
 Device::~Device(){
 	
     int error_code;
-
+	if(this->handle == NULL)
+		return;
 	if(snd_pcm_state(this->handle) == SND_PCM_STATE_OPEN){
-        
-        error_code = snd_pcm_close(this->handle);
-		if(error_code < 0)
-    		printf("error: %s\n", snd_strerror(error_code));
+		error_code = snd_pcm_close(this->handle);
+				if(error_code < 0)
+				printf("error: %s\n", snd_strerror(error_code));
 	}
+	
 }
 
 int Device::set_hw_params(){

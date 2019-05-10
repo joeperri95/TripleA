@@ -65,14 +65,13 @@ void SineWave::generateSquareWave(int harmonics)
 
 void SineWave::generateTriangleWave(int harmonics)
 {       
-    for(int i=1; i < harmonics; i += 1){
-        if(i == 1){
-            for(int j=0; j < ((int) this->channels * this->sampleRate * duration); j++){
-                this->samples[j] = (short) (this->amplitude * 65535 * sin( (double) (this->freq * j * 2 * PI) / this->sampleRate ));
+    for(int j=0; j < ((int) this->channels * this->sampleRate * duration); j++){
+        this->samples[j] = (short) (this->amplitude * 65535 * sin( (double) (this->freq * j * 2 * PI) / this->sampleRate ));
+    }
 
-            }
-        }
-        else if(i & 0x1){
+    for(int i=1; i < harmonics; i += 1){
+        
+        if(i & 0x1){
             for(int j=0; j < ((int) this->channels * this->sampleRate * duration); j++){
                 this->samples[j] = (short) this->samples[j] + ((this->amplitude / (i*i)) * 65535 * sin( (double) (this->freq * j * 2 * (2*i + 1) * PI) / this->sampleRate ));
 
