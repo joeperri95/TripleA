@@ -20,10 +20,6 @@ Sine::Sine(unsigned int sampleRate, unsigned int channels, double duration, doub
 
 }
 
-short *Sine::getSamples(){
-    return this->samples;
-}
-
 Sine::~Sine(){
     free(this->samples);
 }

@@ -1,27 +1,23 @@
-
-#ifndef _SINE_H_
-#define _SINE_H_
+#ifndef __SQUARE_H__
+#define __SQUARE_H__
 
 #include "Tone.hpp"
-#include <math.h>
-#include <memory.h>
-#include <iostream>
 
-class Sine : public Tone {
+class Square : public Tone{
 
 public:
-    Sine(unsigned int sampleRate, 
+    Square(unsigned int sampleRate, 
         unsigned int channels, 
         double duration, 
         double amplitude, 
+        int harmonics,
         double freq);
-    
-    ~Sine();
-    
+
+    ~Square();
 
 private:
     double frequency;
-
+    int harmonics;
 };
 
 #endif

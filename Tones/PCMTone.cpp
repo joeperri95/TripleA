@@ -79,7 +79,9 @@ PCMTone::PCMTone(std::string fileName){
         fs.get(fileSize, 5);
         std::cout << *(int *) fileSize << std::endl;
         
-        realloc(buff ,(*(int *) fileSize) + 1);
+        if(!realloc(buff ,(*(int *) fileSize) + 1)){
+            std::cerr << "error allocating bytes";
+        }
     }
 
     free(buff);
