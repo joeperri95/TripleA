@@ -13,7 +13,7 @@ Triangle::Triangle(unsigned int sampleRate, unsigned int channels, double durati
     this->frequency = freq;
     this->harmonics = harmonics;
 
-    for(int j=0; j < this->numSamples; j++){
+    for(unsigned int j=0; j < this->numSamples; j++){
         this->samples[j] = (short) (this->amplitude * INT16_MAX * sin( (double) (this->frequency * j * TWOPI) / this->sampleRate ));
     }
 

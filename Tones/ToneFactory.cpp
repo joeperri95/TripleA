@@ -4,6 +4,7 @@
 ToneFactory::ToneFactory(){};
 ToneFactory::~ToneFactory(){};
 
+
 Tone ToneFactory::fromWav(std::string filePath){
     
     std::ifstream fs;

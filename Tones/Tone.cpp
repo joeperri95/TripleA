@@ -5,6 +5,12 @@ Tone::Tone(){
 
 }
 
+Tone::Tone(Tone &t){
+    this->channels = t.getChannels();
+    this->numSamples = t.getNumSamples();
+    this->sampleRate = t.getSampleRate();
+}
+
 Tone::~Tone(){
 
 }

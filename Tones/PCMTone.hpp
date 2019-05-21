@@ -1,3 +1,6 @@
+#ifndef __PCM_H__
+#define __PCM_H__
+
 #include "Tone.hpp"
 
 class PCMTone : public Tone{
@@ -10,3 +13,5 @@ public:
     ~PCMTone();
 
 };
+
+#endif

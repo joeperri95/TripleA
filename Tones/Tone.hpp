@@ -15,6 +15,7 @@ class Tone{
 public:
 
     Tone();
+    Tone(Tone &t);
     ~Tone();
 
     void applyEffect(Effect &e);
@@ -26,6 +27,7 @@ public:
     double getDuration();
     
     short *getSamples();
+    short *getNSamples(int n);
 
 protected:
 
