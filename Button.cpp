@@ -20,11 +20,9 @@ Button::Button(float x, float y, float width, float height, std::string text, sf
         this->rect.getPosition().y + (this->rect.getGlobalBounds().height / 2.f) - this->text.getGlobalBounds().height / 2.f     
     );
 
-    std::cout << this->text.getPosition().x << " " << this->text.getPosition().y << std::endl;
-
-    this->idleColor = sf::Color(0xFFFFFFF0);
-    this->hoverColor = sf::Color(0xF0F0F0F0);
-    this->clickedColor = sf::Color(0x000000F0);
+    this->idleColor = sf::Color(0xFFFFFF70);
+    this->hoverColor = sf::Color(0x77777770);
+    this->clickedColor = sf::Color(0x00000070);
 
     this->rect.setFillColor(this->idleColor);
     

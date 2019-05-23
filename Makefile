@@ -1,8 +1,8 @@
 
 CC = g++
 CFLAGS = -Wall --std=c++11 
-SRC = main.cpp Button.cpp App.cpp Device.cpp Tones/Square.cpp Tones/Sine.cpp Track.cpp Tones/Tone.cpp Tones/PCMTone.cpp Effects/DecayEffect.cpp Tones/Triangle.cpp 
-DEPS = App.hpp Button.hpp Device.hpp Tones/Sine.hpp Tones/Tone.hpp Track.hpp Tones/PCMTone.hpp Effects/Effect.hpp Effects/DecayEffect.hpp Tones/Square.hpp Tones/Triangle.hpp 
+SRC = main.cpp Slider.cpp Button.cpp App.cpp Device.cpp Tones/Square.cpp Tones/Sine.cpp Track.cpp Tones/Tone.cpp Tones/PCMTone.cpp Effects/DecayEffect.cpp Tones/Triangle.cpp 
+DEPS = App.hpp Slider.hpp Button.hpp Device.hpp Tones/Sine.hpp Tones/Tone.hpp Track.hpp Tones/PCMTone.hpp Effects/Effect.hpp Effects/DecayEffect.hpp Tones/Square.hpp Tones/Triangle.hpp 
 OBJDIR = ./obj
 OBJECTS = $(patsubst %.cpp, $(OBJDIR)/%.o,$(SRC))
 EXECUTABLE = run

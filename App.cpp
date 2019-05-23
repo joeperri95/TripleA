@@ -24,6 +24,11 @@ void App::render(){
         i->render(this->window);
     }
 
+
+    for(auto i = this->sliders.begin(); i != this->sliders.end(); ++i){
+        i->render(this->window);
+    }
+
     this->window->display();
 }
 
@@ -35,12 +40,15 @@ void App::update(){
         }            
     } 
 
+    sf::Vector2f floatPos( (float) sf::Mouse::getPosition(*this->window).x ,sf::Mouse::getPosition(*this->window).y);
+
     for(auto i = this->buttons.begin(); i != this->buttons.end(); ++i){
-        
-        sf::Vector2f floatPos( (float) sf::Mouse::getPosition(*this->window).x ,sf::Mouse::getPosition(*this->window).y);
         i->update(floatPos);
     }
     
+    for(auto i = this->sliders.begin(); i != this->sliders.end(); ++i){
+        i->update(floatPos);
+    }
 
 }
 
@@ -58,4 +66,8 @@ void App::run(){
 
 void App::addButton(Button &b){
     this->buttons.push_back(b);
+}
+
+void App::addSlider(Slider &s){
+    this->sliders.push_back(s);
 }

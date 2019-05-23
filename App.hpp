@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include "Device.hpp"
 #include "Button.hpp"
+#include "Slider.hpp"
 
 class App{
 
@@ -17,13 +18,14 @@ public:
     void update();
 
     void addButton(Button &b);
+    void addSlider(Slider &s);
 
 private:
     sf::RenderWindow *window;
     sf::Event event;
     Device *device;
     std::vector<Button> buttons;
-
+    std::vector<Slider> sliders;
 };
 
 #endif
