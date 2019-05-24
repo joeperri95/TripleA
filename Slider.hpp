@@ -7,7 +7,7 @@ class Slider{
 
 public:
     Slider();
-    Slider(int initialValue, int maxValue, int minValue, int x, int y, int width, int height);
+    Slider(int *value, int maxValue, int minValue, int x, int y, int width, int height);
     ~Slider();
 
     int getValue();
@@ -19,7 +19,7 @@ public:
     
 
 private:
-    int value;
+    int *value;
     int maxValue;
     int minValue;
     bool pressed;

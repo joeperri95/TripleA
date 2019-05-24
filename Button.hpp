@@ -5,6 +5,14 @@
 #include <string>
 #include <iostream>
 
+
+typedef enum{
+    IDLE,
+    HOVER,
+    PRESSED
+}button_state;
+
+
 class Button{
 
 public:
@@ -23,6 +31,7 @@ private:
 
     bool pressed;
     bool hover;
+    button_state state;
 
     sf::RectangleShape rect;
     sf::Font *font;

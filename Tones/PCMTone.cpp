@@ -47,7 +47,6 @@ PCMTone::PCMTone(std::string fileName){
     
     char data[5];
     char fileSize[5];
-    
     char *buff;
 
     fs.get(_RIFF, 5);
@@ -69,31 +68,31 @@ PCMTone::PCMTone(std::string fileName){
     
     fs.get(data, 5);
     fs.get(fileSize, 5);
-    std::cout << *(int *) fileSize << std::endl;
     buff = (char *) malloc(*(int *)fileSize + 1);
-
+    
     while(std::string("data").compare(data) != 0){
-        std::cout << data << std::endl;
+
         fs.get(buff, (*(int *) fileSize) + 1);
         fs.get(data, 5);
         fs.get(fileSize, 5);
-        std::cout << *(int *) fileSize << std::endl;
         
         if(!realloc(buff ,(*(int *) fileSize) + 1)){
             std::cerr << "error allocating bytes";
         }
+        
     }
 
     free(buff);
+    
     short *buffer = (short *) malloc((*(int *) fileSize + 1));
     char temp[2];
 
-    for(int i=0; i < (*(int *)fileSize + 1); i++){
+    for(int i=0; i < (*(int *)fileSize + 1) >> 1; i++){
         fs.read(temp,2);
         buffer[i] = *(short *) temp;
-    
+        
     }
-
+    
     this->samples = buffer;
     this->channels = *(short *)_channels;
     this->amplitude = 1.0;

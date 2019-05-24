@@ -36,6 +36,11 @@ double Tone::getDuration(){
 }
 
 void Tone::setAmplitude(double amplitude){
+    
+    for(unsigned int i = 0; i < this->numSamples; i++){
+        this->samples[i] = (short) amplitude * this->samples[i];
+    }
+    
     this->amplitude = amplitude;
 }
 

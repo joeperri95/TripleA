@@ -5,8 +5,8 @@ Slider::~Slider(){
 
 }
 
-Slider::Slider(int initialValue, int maxValue, int minValue, int x, int y, int width, int height){
-    this->value = initialValue;
+Slider::Slider(int *value, int maxValue, int minValue, int x, int y, int width, int height){
+    this->value = value;
     this->maxValue = maxValue;
     this->minValue = minValue;
 
@@ -18,12 +18,12 @@ Slider::Slider(int initialValue, int maxValue, int minValue, int x, int y, int w
     this->sliderCircle.setRadius(5);
     
 
-    float percent = (float) (this->value) / this->maxValue;
-    int offset = (int) (percent * width) + x;
+    float percent = (float) *(this->value) / this->maxValue;
+    int offset = (int) (percent * width) + x - this->sliderCircle.getRadius();
     
     std::cout << percent << " " << offset << " " <<  y + height / 2 << std::endl;
 
-    this->sliderCircle.setPosition(sf::Vector2f(offset, y + height / 2));
+    this->sliderCircle.setPosition(sf::Vector2f(offset, y + (height / 2) - this->sliderCircle.getRadius()));
     this->sliderCircle.setFillColor(this->circleColor);
 
 }
@@ -47,8 +47,6 @@ void Slider::update(sf::Vector2f mousePos){
         this->pressed = false;
     }
 
-    
-
     if(this->pressed == true){
         this->sliderCircle.setFillColor(sf::Color(0x00FF00FF));
     }
@@ -70,17 +68,17 @@ bool Slider::isPressed(){
 
 void Slider::setValue(int value){
     if(value > this->maxValue){
-        this->value = this->maxValue;
+        *this->value = this->maxValue;
     }
     else if(value < this->minValue){
-        this->value = this->minValue;
+        *this->value = this->minValue;
     }
     else{
-        this->value = value;        
+        *this->value = value;        
     }
 
-    float percent = (float) (this->value) / this->maxValue;
-    int offset = (int) (percent * this->sliderBar.getSize().x) + this->sliderBar.getPosition().x;
+    float percent = (float) *(this->value) / this->maxValue;
+    int offset = (int) (percent * this->sliderBar.getSize().x) + this->sliderBar.getPosition().x - this->sliderCircle.getRadius();
     
-    this->sliderCircle.setPosition( sf::Vector2f(offset, this->sliderBar.getGlobalBounds().top + this->sliderBar.getGlobalBounds().height / 2)) ;
+    this->sliderCircle.setPosition( sf::Vector2f(offset, this->sliderBar.getGlobalBounds().top + (this->sliderBar.getGlobalBounds().height / 2) - this->sliderCircle.getRadius()));
 }

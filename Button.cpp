@@ -20,6 +20,8 @@ Button::Button(float x, float y, float width, float height, std::string text, sf
         this->rect.getPosition().y + (this->rect.getGlobalBounds().height / 2.f) - this->text.getGlobalBounds().height / 2.f     
     );
 
+    this->state = button_state::IDLE;
+
     this->idleColor = sf::Color(0xFFFFFF70);
     this->hoverColor = sf::Color(0x77777770);
     this->clickedColor = sf::Color(0x00000070);
@@ -34,23 +36,39 @@ void Button::render(sf::RenderTarget *target){
 }
 
 void Button::update(sf::Vector2f mousePos){
- 
+    
     this->hover = false;
     this->pressed = false;
 
     if(this->rect.getGlobalBounds().contains(mousePos)){
         this->hover = true;
+        
         if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
-            this->pressed = true;
-            this->hover = false;
+            if(this->state == button_state::HOVER){
+                this->state = button_state::PRESSED;
+            }
+        }
+        else{
+            if(this->state == button_state::IDLE){
+                this->state = button_state::HOVER;
+            }
+            else if(this->state == button_state::PRESSED){
+                this->state = button_state::HOVER;
+            }
         }
     }
+    
+    else{
+        
+        this->state = button_state::IDLE;
+    }
 
-    if(this->hover){
+    if(this->state == button_state::HOVER){
         this->rect.setFillColor(this->hoverColor);
     }
-    else if(this->pressed){
+    else if(this->state == button_state::PRESSED){
         this->rect.setFillColor(this->clickedColor);
+        
     }
     else{
         this->rect.setFillColor(this->idleColor);

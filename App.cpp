@@ -29,6 +29,11 @@ void App::render(){
         i->render(this->window);
     }
 
+
+    for(auto i = this->images.begin(); i != this->images.end(); ++i){
+        this->window->draw(*i);
+    }
+
     this->window->display();
 }
 
@@ -50,6 +55,7 @@ void App::update(){
         i->update(floatPos);
     }
 
+
 }
 
 //main loop
@@ -61,6 +67,25 @@ void App::run(){
         this->render();
 
     }
+
+}
+
+void App::addImage(sf::Texture tex, int x, int y){
+    sf::Sprite s(tex);
+    s.setPosition(x, y);
+    this->images.push_back(s);
+    this->textures.push_back(tex);
+}
+
+void App::addImage(std::string s, int x, int y){
+    sf::Texture tex;
+    tex.loadFromFile(s);
+    this->textures.push_back(tex);
+
+    sf::Sprite spr(*(this->textures.end() - 1));
+    spr.setPosition(x, y);
+    this->images.push_back(spr);
+    
 
 }
 
