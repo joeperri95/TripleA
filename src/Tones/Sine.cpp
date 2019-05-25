@@ -1,5 +1,5 @@
 
-#include "Sine.hpp"
+#include "../../include/Tones/Sine.hpp"
 
 Sine::Sine(unsigned int sampleRate, unsigned int channels, double duration, double amplitude, double freq){
 

@@ -1,4 +1,4 @@
-#include "DecayEffect.hpp"
+#include "../../include/Effects/DecayEffect.hpp"
 
 #include <iostream>
 

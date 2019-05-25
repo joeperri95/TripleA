@@ -1,5 +1,5 @@
 
-#include "Square.hpp"
+#include "../../include/Tones/Square.hpp"
 
 Square::Square(unsigned int sampleRate, unsigned int channels, double duration, double amplitude, int harmonics, double freq){
 

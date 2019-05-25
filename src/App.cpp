@@ -1,4 +1,4 @@
-#include "App.hpp"
+#include "../include/App.hpp"
 
 App::App(){
     this->init();
@@ -28,7 +28,6 @@ void App::render(){
     for(auto i = this->sliders.begin(); i != this->sliders.end(); ++i){
         i->render(this->window);
     }
-
 
     for(auto i = this->images.begin(); i != this->images.end(); ++i){
         this->window->draw(*i);

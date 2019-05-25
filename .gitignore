@@ -1,6 +1,7 @@
 /.vscode/
 
 #sample songs
+/res/*
 /wavs/
 *.wav
 *.mp3

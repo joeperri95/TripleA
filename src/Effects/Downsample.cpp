@@ -1,4 +1,4 @@
-#include "Downsample.hpp"
+#include "../../include/Effects/Downsample.hpp"
 
 #include <iostream>
 #include <random>

@@ -1,5 +1,5 @@
 
-#include "Triangle.hpp"
+#include "../../include/Tones/Triangle.hpp"
 
 Triangle::Triangle(unsigned int sampleRate, unsigned int channels, double duration, double amplitude, int harmonics, double freq){
 

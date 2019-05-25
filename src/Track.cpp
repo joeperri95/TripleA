@@ -1,5 +1,5 @@
 
-#include "Track.hpp"
+#include "../include/Track.hpp"
 #include <iostream>
 
 Track::Track(Device &d, unsigned int sampleRate, unsigned int channels){
@@ -32,8 +32,8 @@ void Track::addTone(Tone &t, double startTime){
     if(this->buffer == NULL){
 
         if(t.getSampleRate() != this->sampleRate){
-            std::cerr << "unequal sample rates not yet implemented" << std::endl;
-            return;
+            //std::cerr << "unequal sample rates not yet implemented" << std::endl;
+            //return;
         }
 
         if(t.getChannels() != this->channels ){

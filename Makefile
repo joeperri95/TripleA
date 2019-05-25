@@ -1,11 +1,11 @@
 
 CC = g++
 CFLAGS = -Wall --std=c++11 
-SRC = main.cpp Effects/Downsample.cpp Slider.cpp Button.cpp App.cpp Device.cpp Tones/Square.cpp Tones/Sine.cpp Track.cpp Tones/Tone.cpp Tones/PCMTone.cpp Effects/DecayEffect.cpp Tones/Triangle.cpp 
-DEPS = App.hpp Effects/Downsample.hpp Slider.hpp Button.hpp Device.hpp Tones/Sine.hpp Tones/Tone.hpp Track.hpp Tones/PCMTone.hpp Effects/Effect.hpp Effects/DecayEffect.hpp Tones/Square.hpp Tones/Triangle.hpp 
+SRC = main.cpp src/Effects/Downsample.cpp src/Slider.cpp src/Button.cpp src/App.cpp src/Device.cpp src/Tones/Square.cpp src/Tones/Sine.cpp src/Track.cpp src/Tones/Tone.cpp src/Tones/PCMTone.cpp src/Effects/DecayEffect.cpp src/Tones/Triangle.cpp 
+DEPS = include/App.hpp include/Effects/Downsample.hpp include/Slider.hpp include/Button.hpp include/Device.hpp include/Tones/Sine.hpp include/Tones/Tone.hpp include/Track.hpp include/Tones/PCMTone.hpp include/Effects/Effect.hpp include/Effects/DecayEffect.hpp include/Tones/Square.hpp include/Tones/Triangle.hpp 
 OBJDIR = ./obj
 OBJECTS = $(patsubst %.cpp, $(OBJDIR)/%.o,$(SRC))
-EXECUTABLE = run
+EXECUTABLE = a.out
 
 
 SFML = $(shell pkg-config --cflags --libs sfml-all)

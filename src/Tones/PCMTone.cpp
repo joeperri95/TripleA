@@ -1,5 +1,5 @@
 
-#include "PCMTone.hpp"
+#include "../../include/Tones/PCMTone.hpp"
 #include <memory.h>
 #include <fstream>
 #include <iostream>

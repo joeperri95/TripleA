@@ -1,7 +1,7 @@
 #ifndef __SLIDER_H__
 #define __SLIDER_H__
 
-#include "SFML/Graphics.hpp"
+#include <SFML/Graphics.hpp>
 
 class Slider{
 

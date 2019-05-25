@@ -1,5 +1,5 @@
 
-#include "ToneFactory.hpp"
+#include "../../include/Tones/ToneFactory.hpp"
 
 ToneFactory::ToneFactory(){};
 ToneFactory::~ToneFactory(){};
