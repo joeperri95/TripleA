@@ -8,6 +8,9 @@ Track::Track(Device &d, unsigned int sampleRate, unsigned int channels){
     this->numSamples = 0;
     this->buffer = NULL;
     this->channels = channels;
+    this->currentSample = this-> buffer;
+    this->playing = false;
+    this->amplitude = 1.0;
 }
 
 Track::Track(unsigned int sampleRate, unsigned int channels){
@@ -16,6 +19,8 @@ Track::Track(unsigned int sampleRate, unsigned int channels){
     this->numSamples = 0;
     this->buffer = NULL;
     this->channels = channels;
+    this->playing = false;
+    this->amplitude = 1.0;
 }
 
 
@@ -58,6 +63,9 @@ void Track::addTone(Tone &t, double startTime){
             *(this->buffer + i) = *(tonebuffer + i);
         }
 
+        //set current sample at start of buffer
+        this->currentSample = this->buffer;
+
     }
 
     else{
@@ -67,9 +75,36 @@ void Track::addTone(Tone &t, double startTime){
 
 }
 
+void Track::update(){
+    if(this->playing){
+        this->dev.writeSamples(this->currentSample, 8192);
+        currentSample += 8192;    
+    }
+}
+
+void Track::pause(){
+    this->playing = false;
+}
 
 void Track::play(){
-
-    this->dev.writeSamples(this->buffer, this->numSamples);
+    this->playing = true;
+    //this->dev.writeSamples(this->buffer, this->numSamples);
     
+}
+
+bool Track::isPlaying(){
+    return this->playing;
+}
+
+void Track::setAmplitude(double amp){
+    
+    double diff = this->amplitude - amp;
+    this->amplitude = amp;
+
+    for(unsigned int i = 0; i < this->numSamples; i++){
+    
+        *(this->buffer + i) = (1 - diff) * *(this->buffer + i);
+
+    }
+
 }

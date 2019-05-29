@@ -81,5 +81,10 @@ bool Button::isHovering(){
 }
 
 bool Button::isPressed(){
-    return this->pressed;
+    if(this->state == button_state::PRESSED){
+        return true;
+    }
+    else{
+        return false;
+    }
 }

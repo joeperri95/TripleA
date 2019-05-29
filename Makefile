@@ -1,11 +1,11 @@
 
 CC = g++
 CFLAGS = -Wall --std=c++11 
-SRC = main.cpp src/Effects/Downsample.cpp src/Slider.cpp src/Button.cpp src/App.cpp src/Device.cpp src/Tones/Square.cpp src/Tones/Sine.cpp src/Track.cpp src/Tones/Tone.cpp src/Tones/PCMTone.cpp src/Effects/DecayEffect.cpp src/Tones/Triangle.cpp 
-DEPS = include/App.hpp include/Effects/Downsample.hpp include/Slider.hpp include/Button.hpp include/Device.hpp include/Tones/Sine.hpp include/Tones/Tone.hpp include/Track.hpp include/Tones/PCMTone.hpp include/Effects/Effect.hpp include/Effects/DecayEffect.hpp include/Tones/Square.hpp include/Tones/Triangle.hpp 
+SRC = main.cpp src/Oscilloscope.cpp src/Effects/Downsample.cpp src/Slider.cpp src/Button.cpp src/App.cpp src/Device.cpp src/Tones/Square.cpp src/Tones/Sine.cpp src/Track.cpp src/Tones/Tone.cpp src/Tones/PCMTone.cpp src/Effects/DecayEffect.cpp src/Tones/Triangle.cpp 
+DEPS = include/App.hpp include/Oscilloscope.hpp include/Effects/Downsample.hpp include/Slider.hpp include/Button.hpp include/Device.hpp include/Tones/Sine.hpp include/Tones/Tone.hpp include/Track.hpp include/Tones/PCMTone.hpp include/Effects/Effect.hpp include/Effects/DecayEffect.hpp include/Tones/Square.hpp include/Tones/Triangle.hpp 
 OBJDIR = ./obj
 OBJECTS = $(patsubst %.cpp, $(OBJDIR)/%.o,$(SRC))
-EXECUTABLE = a.out
+EXECUTABLE = app
 
 
 SFML = $(shell pkg-config --cflags --libs sfml-all)

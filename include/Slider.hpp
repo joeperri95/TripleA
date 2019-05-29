@@ -11,6 +11,9 @@ public:
     ~Slider();
 
     int getValue();
+    int getMin();
+    int getMax();
+
     void render(sf::RenderTarget *target);
     void update(sf::Vector2f mousePos);
     bool isPressed();

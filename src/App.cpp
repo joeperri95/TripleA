@@ -1,7 +1,9 @@
 #include "../include/App.hpp"
 
 App::App(){
+    
     this->init();
+    
 }
 
 App::~App(){
@@ -13,6 +15,7 @@ void App::init(){
 
     this->window = new sf::RenderWindow(sf::VideoMode(800,600), "App");
     this->device = new Device();
+
 }
 
 void App::render(){
@@ -23,7 +26,6 @@ void App::render(){
     for(auto i = this->buttons.begin(); i != this->buttons.end(); ++i){
         i->render(this->window);
     }
-
 
     for(auto i = this->sliders.begin(); i != this->sliders.end(); ++i){
         i->render(this->window);
@@ -41,7 +43,7 @@ void App::update(){
     while(this->window->pollEvent(this->event)){
         if(this->event.type == sf::Event::Closed){
             this->window->close();
-        }            
+        }        
     } 
 
     sf::Vector2f floatPos( (float) sf::Mouse::getPosition(*this->window).x ,sf::Mouse::getPosition(*this->window).y);
@@ -53,7 +55,6 @@ void App::update(){
     for(auto i = this->sliders.begin(); i != this->sliders.end(); ++i){
         i->update(floatPos);
     }
-
 
 }
 
@@ -85,7 +86,6 @@ void App::addImage(std::string s, int x, int y){
     spr.setPosition(x, y);
     this->images.push_back(spr);
     
-
 }
 
 void App::addButton(Button &b){

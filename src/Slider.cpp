@@ -20,8 +20,6 @@ Slider::Slider(int *value, int maxValue, int minValue, int x, int y, int width, 
 
     float percent = (float) *(this->value) / this->maxValue;
     int offset = (int) (percent * width) + x - this->sliderCircle.getRadius();
-    
-    std::cout << percent << " " << offset << " " <<  y + height / 2 << std::endl;
 
     this->sliderCircle.setPosition(sf::Vector2f(offset, y + (height / 2) - this->sliderCircle.getRadius()));
     this->sliderCircle.setFillColor(this->circleColor);
@@ -81,4 +79,16 @@ void Slider::setValue(int value){
     int offset = (int) (percent * this->sliderBar.getSize().x) + this->sliderBar.getPosition().x - this->sliderCircle.getRadius();
     
     this->sliderCircle.setPosition( sf::Vector2f(offset, this->sliderBar.getGlobalBounds().top + (this->sliderBar.getGlobalBounds().height / 2) - this->sliderCircle.getRadius()));
+}
+
+int Slider::getMax(){
+    return this->maxValue;
+}
+
+int Slider::getMin(){
+    return this->minValue;
+}
+
+int Slider::getValue(){
+    return *this->value;
 }

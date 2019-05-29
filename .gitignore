@@ -9,6 +9,8 @@
 #built objects
 *.o
 /obj
+app
+a.out
 run
 
 

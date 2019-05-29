@@ -5,6 +5,12 @@
 #include "Device.hpp"
 #include "Button.hpp"
 #include "Slider.hpp"
+#include "Oscilloscope.hpp"
+
+//remove
+#include "Track.hpp"
+#include "Tones/PCMTone.hpp"
+#include "Tones/Sine.hpp"
 
 class App{
 
@@ -29,6 +35,9 @@ private:
     sf::RenderWindow *window;
     sf::Event event;
     Device *device;
+    
+    int volume;
+
     std::vector<Button> buttons;
     std::vector<Slider> sliders;
     std::vector<sf::Sprite> images;
