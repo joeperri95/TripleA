@@ -1,9 +1,9 @@
 #ifndef __SLIDER_H__
 #define __SLIDER_H__
 
-#include <SFML/Graphics.hpp>
+#include "Widget.hpp"
 
-class Slider{
+class Slider : public Widget{
 
 public:
     Slider();
@@ -16,6 +16,7 @@ public:
 
     void render(sf::RenderTarget *target);
     void update(sf::Vector2f mousePos);
+    void notify(sf::Event e);
     bool isPressed();
     
     void setValue(int value);

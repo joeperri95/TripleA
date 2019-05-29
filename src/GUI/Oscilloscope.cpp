@@ -1,4 +1,4 @@
-#include "../include/Oscilloscope.hpp"
+#include "../../include/GUI/Oscilloscope.hpp"
 
 #include <iostream>
 

@@ -43,9 +43,14 @@ void App::update(){
     while(this->window->pollEvent(this->event)){
         if(this->event.type == sf::Event::Closed){
             this->window->close();
-        }        
-    } 
+        }
 
+        for(auto i = this->buttons.begin(); i != this->buttons.end(); ++i){
+            i->notify(this->event);
+        }     
+
+    } 
+    
     sf::Vector2f floatPos( (float) sf::Mouse::getPosition(*this->window).x ,sf::Mouse::getPosition(*this->window).y);
 
     for(auto i = this->buttons.begin(); i != this->buttons.end(); ++i){

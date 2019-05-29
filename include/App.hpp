@@ -3,9 +3,11 @@
 
 #include <SFML/Graphics.hpp>
 #include "Device.hpp"
-#include "Button.hpp"
-#include "Slider.hpp"
-#include "Oscilloscope.hpp"
+#include "GUI/Button.hpp"
+#include "GUI/Slider.hpp"
+#include "GUI/Oscilloscope.hpp"
+#include "GUI/Widget.hpp"
+
 
 //remove
 #include "Track.hpp"
@@ -40,6 +42,7 @@ private:
 
     std::vector<Button> buttons;
     std::vector<Slider> sliders;
+
     std::vector<sf::Sprite> images;
     std::vector<sf::Texture> textures;
 };

@@ -9,7 +9,8 @@
 typedef enum{
     IDLE,
     HOVER,
-    PRESSED
+    PRESSED_ON,
+    PRESSED_OFF
 }button_state;
 
 
@@ -22,6 +23,7 @@ public:
 
     void render(sf::RenderTarget *target);
     void update(sf::Vector2f mousePos);
+    void notify(sf::Event e);
 
     bool isPressed();
     bool isHovering();
@@ -29,8 +31,6 @@ public:
 
 private:
 
-    bool pressed;
-    bool hover;
     button_state state;
 
     sf::RectangleShape rect;
