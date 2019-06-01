@@ -4,7 +4,8 @@
 #include <SFML/Graphics.hpp>
 #include <string>
 #include <iostream>
-
+#include "Widget.hpp"
+#include "Listener.hpp"
 
 typedef enum{
     IDLE,
@@ -14,24 +15,31 @@ typedef enum{
 }button_state;
 
 
-class Button{
+
+
+class Button : public Widget{
 
 public:
 
-    Button(float x, float y, float width, float height, std::string text, sf::Font *font);
+    Button(int x, int y, int width, int height, std::string text);
+    Button(int x, int y, int width, int height, std::string text, sf::Font *font);
     ~Button();
 
     void render(sf::RenderTarget *target);
     void update(sf::Vector2f mousePos);
     void notify(sf::Event e);
+    void addListener(Listener &l);
 
     bool isPressed();
     bool isHovering();
-    
 
 private:
 
     button_state state;
+
+    bool active;
+
+    std::vector<Listener> listeners;
 
     sf::RectangleShape rect;
     sf::Font *font;

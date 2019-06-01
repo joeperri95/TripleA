@@ -4,7 +4,8 @@ Button::~Button(){
 
 };
 
-Button::Button(float x, float y, float width, float height, std::string text, sf::Font *font){
+
+Button::Button(int x, int y, int width, int height, std::string text, sf::Font *font){
     
     this->rect.setSize(sf::Vector2f(width, height));
     this->rect.setPosition(sf::Vector2f(x,y));
@@ -21,13 +22,14 @@ Button::Button(float x, float y, float width, float height, std::string text, sf
     );
 
     this->state = button_state::IDLE;
+    this->active = false;
 
     this->idleColor = sf::Color(0xFFFFFF70);
     this->hoverColor = sf::Color(0x77777770);
     this->clickedColor = sf::Color(0x00000070);
 
     this->rect.setFillColor(this->idleColor);
-    
+
 }
 
 void Button::render(sf::RenderTarget *target){
@@ -37,29 +39,15 @@ void Button::render(sf::RenderTarget *target){
 
 void Button::update(sf::Vector2f mousePos){
     
-    /* 
-    if(this->rect.getGlobalBounds().contains(mousePos)){
-        
-        if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
-            if(this->state == button_state::HOVER){
-                this->state = button_state::PRESSED;
-            }
+    if(this->active){
+
+        for(auto i = this->listeners.begin(); i != this->listeners.end(); ++i){
+            i->Execute();
         }
-        else{
-            if(this->state == button_state::IDLE){
-                this->state = button_state::HOVER;
-            }
-            else if(this->state == button_state::PRESSED){
-                this->state = button_state::HOVER;
-            }
-        }
+
+        this->active = false;
     }
-    
-    else{
-        
-        this->state = button_state::IDLE;
-    }
- */
+
     if(this->state == button_state::HOVER){
         this->rect.setFillColor(this->hoverColor);
     }
@@ -70,6 +58,10 @@ void Button::update(sf::Vector2f mousePos){
         this->rect.setFillColor(this->idleColor);
     }
 
+}
+
+void Button::addListener(Listener &l){
+    this->listeners.push_back(l);
 }
 
 void Button::notify(sf::Event e){
@@ -120,6 +112,7 @@ void Button::notify(sf::Event e){
                     break;
                 case HOVER:
                     this->state = button_state::PRESSED_ON;
+                    this->active = true;
                     break;
                 case PRESSED_ON:
                     this->state = button_state::PRESSED_ON;
@@ -151,7 +144,6 @@ void Button::notify(sf::Event e){
     }
 
 }
-
 
 bool Button::isHovering(){
     if(this->state == button_state::HOVER){

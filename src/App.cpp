@@ -12,10 +12,8 @@ App::~App(){
 }
 
 void App::init(){
-
     this->window = new sf::RenderWindow(sf::VideoMode(800,600), "App");
     this->device = new Device();
-
 }
 
 void App::render(){

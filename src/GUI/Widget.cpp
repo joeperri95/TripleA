@@ -2,6 +2,15 @@
 
 Widget::Widget(){}
 Widget::~Widget(){}
+
 void Widget::notify(sf::Event e){}
 void Widget::render(sf::RenderTarget *target){}
 void Widget::update(){}
+
+int Widget::getX(){
+    return this->x;
+}
+
+int Widget::getY(){
+    return this->y;
+}

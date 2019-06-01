@@ -12,6 +12,9 @@ public:
     Widget();
     ~Widget();
 
+    int getX();
+    int getY();    
+
     virtual void update();
     virtual void render(sf::RenderTarget *target);
     virtual void notify(sf::Event e);

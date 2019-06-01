@@ -8,7 +8,6 @@
 #include "GUI/Oscilloscope.hpp"
 #include "GUI/Widget.hpp"
 
-
 //remove
 #include "Track.hpp"
 #include "Tones/PCMTone.hpp"
