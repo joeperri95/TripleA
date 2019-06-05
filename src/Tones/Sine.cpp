@@ -13,7 +13,7 @@ Sine::Sine(unsigned int sampleRate, unsigned int channels, double duration, doub
     this->frequency = freq;
 
     for(unsigned int i = 0; i < this->numSamples; i++){
-        short tmp = (short) (this->amplitude * INT16_MAX * sin((double) (this->frequency * TWOPI * i) / this->sampleRate));
+        short tmp = (short) (this->amplitude * INT16_MAX * sin((double) (this->frequency / this->channels * TWOPI * i) / this->sampleRate));
         this->samples[i] = tmp;
              
     }

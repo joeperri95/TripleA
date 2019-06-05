@@ -6,14 +6,16 @@
 class Vibrato : public Effect {
 
 public:
-    Vibrato(unsigned int frequency);
-    ~Vibrato();
+    Vibrato(double amplitude, double frequency, int modulation);
+    Vibrato(double amplitude, double frequency);
 
     void apply(short *buffer, unsigned int sampleRate, int N);
 
 private:
-    unsigned int frequency;
-
+    double frequency;
+    double amplitude;
+    //this is the maximum number of samples the Vibrato will stray
+    int modulation;
 };
 
 #endif

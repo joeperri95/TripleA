@@ -16,13 +16,13 @@ Square::Square(unsigned int sampleRate, unsigned int channels, double duration, 
     for(int i=1; i < this->harmonics; i += 2){
         if(i == 1){
             for(int j=0; j < ((int) this->channels * this->sampleRate * duration); j++){
-                this->samples[j] = (short) (this->amplitude * 65535 * sin( (double) (this->frequency * j * TWOPI) / this->sampleRate ));
+                this->samples[j] = (short) (this->amplitude * 65535 * sin( (double) (this->frequency / this->channels * j * TWOPI) / this->sampleRate ));
 
             }
         }
         else{
             for(int j=0; j < ((int) this->channels * this->sampleRate * duration); j++){
-                this->samples[j] = (short) this->samples[j] + ((this->amplitude / i) * 65535 * sin( (double) (this->frequency * j * i * TWOPI) / this->sampleRate ));
+                this->samples[j] = (short) this->samples[j] + ((this->amplitude / i) * 65535 * sin( (double) (this->frequency / this->channels * j * i * TWOPI) / this->sampleRate ));
 
             }
         }

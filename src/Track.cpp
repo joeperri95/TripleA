@@ -9,16 +9,21 @@ Track::Track(Device &d, unsigned int sampleRate, unsigned int channels){
     this->buffer = NULL;
     this->channels = channels;
     this->currentSample = this-> buffer;
+    this->currentSampleCount = 0;
+    this->loop = false;
     this->playing = false;
     this->amplitude = 1.0;
 }
 
 Track::Track(unsigned int sampleRate, unsigned int channels){
-    this->dev = Device("default", SND_PCM_FORMAT_S16_LE, sampleRate * channels, 1, 2, 8192, 4096, 0, SND_PCM_ACCESS_RW_INTERLEAVED);
+    this->dev = Device("default", SND_PCM_FORMAT_S16_LE, sampleRate * channels, 1, 2, 1024, 512, 0, SND_PCM_ACCESS_RW_INTERLEAVED);
     this->sampleRate = sampleRate;
     this->numSamples = 0;
     this->buffer = NULL;
     this->channels = channels;
+    this->currentSampleCount = 0;
+    this->currentSample = NULL;
+    this->loop = false;
     this->playing = false;
     this->amplitude = 1.0;
 }
@@ -77,8 +82,22 @@ void Track::addTone(Tone &t, double startTime){
 
 void Track::update(){
     if(this->playing){
-        this->dev.writeSamples(this->currentSample, 8192);
-        currentSample += 8192;    
+        this->dev.writeSamples(this->currentSample, 1024);
+          
+        this->currentSampleCount += 1024;
+        if((this->currentSampleCount + 1024) > this->numSamples){
+            if(this->loop){
+                this->currentSample = this->buffer + 32;
+                this->currentSampleCount = 32;
+            }
+            else{
+                this->pause();
+            }
+        }
+        else{
+            this->currentSample += 1024;
+        }
+        
     }
 }
 
@@ -107,4 +126,8 @@ void Track::setAmplitude(double amp){
 
     }
 
+}
+
+void Track::setLoop(bool val){
+    this->loop = val;
 }

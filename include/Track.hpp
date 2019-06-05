@@ -24,6 +24,7 @@ public:
     void update();
     void toWav(std::string filename);
     void toMP3(std::string filename);
+    void setLoop(bool val);
 
     bool isPlaying();
     float getPlaybackPercentage();
@@ -31,6 +32,7 @@ public:
 private:
 
     Device dev;
+    bool loop;
     short *buffer;
     short *currentSample;
     int currentSampleCount;

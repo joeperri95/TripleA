@@ -10,6 +10,10 @@
 #define TWOPI 6.283185307
 #endif
 
+#ifndef PI
+#define PI  3.141592653
+#endif
+
 class Tone{
 
 public:

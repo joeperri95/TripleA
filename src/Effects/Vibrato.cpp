@@ -1,29 +1,29 @@
 #include "../../include/Effects/Vibrato.hpp"
 #include <stdint.h>
 
-Vibrato::Vibrato(unsigned int frequency){
+Vibrato::Vibrato(double amplitude, double frequency, int modulation){
     this->frequency = frequency;
+    this->amplitude = amplitude;
+    this->modulation = modulation;
+}
+
+
+Vibrato::Vibrato(double amplitude, double frequency){
+    this->frequency = frequency;
+    this->amplitude = amplitude;
+
+    this->modulation = 65;
 }
 
 void Vibrato::apply(short *buffer, unsigned int sampleRate, int N){
 
-    
-    double amplitude = 0.1;
-    int onePeriod = this->frequency / sampleRate;
-    int offset = 0;
-    short *carrier = (short *) malloc(onePeriod * sizeof(short));        
-    
-    //build modulating carrier
-    for(int i = 0; i < onePeriod; i++){
-        *(carrier+i) = (short) (INT16_MAX * amplitude * sin(TWOPI * (onePeriod - i) * this->frequency));
-    }
-
-    //build final waveform
     for(int i = 0; i < N; i++){
-        *(buffer + i) = *(buffer + i);
-        
-        offset++;
-    }   
 
+        short modulatedComponent = (short) (this->amplitude * *(buffer + i + (int) (this->modulation * sin(TWOPI * i * this->frequency / sampleRate))));  
+        short normalComponent = (short) ((1-this->amplitude) * *(buffer + i));
+
+        *(buffer + i) = normalComponent + modulatedComponent;
+        
+    }   
 
 }
