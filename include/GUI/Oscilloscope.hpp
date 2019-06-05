@@ -15,7 +15,7 @@ public:
     void plot();
     void render(sf::RenderTarget *target);
     void update();
-
+    
 private:
 
     int x, y, height, width;

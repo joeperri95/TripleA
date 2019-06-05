@@ -27,7 +27,7 @@ public:
     double getDuration();
     
     short *getSamples();
-    short *getNSamples(int n);
+    short *getNSamples(int start, int n);
 
 protected:
 

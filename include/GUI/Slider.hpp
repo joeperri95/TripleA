@@ -3,6 +3,16 @@
 
 #include "Widget.hpp"
 
+typedef enum{
+    SLIDER_IDLE,
+    SLIDER_HOVER,
+    SLIDER_CLICKED_ON,
+    SLIDER_CLICKED_OFF
+
+} slider_state;
+
+
+
 class Slider : public Widget{
 
 public:

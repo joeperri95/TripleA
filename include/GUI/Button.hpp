@@ -26,7 +26,7 @@ public:
     ~Button();
 
     void render(sf::RenderTarget *target);
-    void update(sf::Vector2f mousePos);
+    void update();
     void notify(sf::Event e);
     void addListener(Listener &l);
 
@@ -40,7 +40,7 @@ private:
     bool active;
 
     std::vector<Listener> listeners;
-
+    std::vector<sf::RectangleShape> rects;
     sf::RectangleShape rect;
     sf::Font *font;
     sf::Text text;

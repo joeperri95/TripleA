@@ -37,7 +37,7 @@ void Button::render(sf::RenderTarget *target){
     target->draw(this->text);
 }
 
-void Button::update(sf::Vector2f mousePos){
+void Button::update(){
     
     if(this->active){
 

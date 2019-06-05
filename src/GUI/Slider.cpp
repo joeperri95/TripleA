@@ -28,7 +28,7 @@ Slider::Slider(int *value, int maxValue, int minValue, int x, int y, int width, 
 
 
 void Slider::update(sf::Vector2f mousePos){
-/*     
+/* 
     if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
         if(this->sliderCircle.getGlobalBounds().contains(mousePos)){
             this->pressed = true;
@@ -107,6 +107,11 @@ void Slider::notify(sf::Event e){
         else{
             this->sliderCircle.setFillColor(this->circleColor);
         }
+    }
+    else if(e.type == sf::Event::MouseLeft){
+        
+
+
     }
 
 }
