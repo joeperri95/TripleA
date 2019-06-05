@@ -6,6 +6,7 @@
 #define TWOPI 6.283185307 
 #endif
 
+#include <stdlib.h>
 #include <cmath>
 
 class Effect{
