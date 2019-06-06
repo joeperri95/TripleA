@@ -7,9 +7,12 @@ Button::~Button(){
 
 Button::Button(int x, int y, int width, int height, std::string text, sf::Font *font){
     
-    this->rect.setSize(sf::Vector2f(width, height));
-    this->rect.setPosition(sf::Vector2f(x,y));
-    
+    sf::RectangleShape rect;
+    rect.setSize(sf::Vector2f(width, height));
+    rect.setPosition(sf::Vector2f(x,y));
+    rect.setFillColor(this->idleColor);
+    this->rects.push_back(rect);
+
     this->font = font;
     this->text.setFont(*this->font);
     this->text.setString(text);
@@ -17,8 +20,8 @@ Button::Button(int x, int y, int width, int height, std::string text, sf::Font *
     this->text.setCharacterSize(12);
     this->text.setPosition(0,0);
     this->text.setPosition(
-        this->rect.getPosition().x + (this->rect.getGlobalBounds().width / 2.f) - this->text.getGlobalBounds().width / 2.f,
-        this->rect.getPosition().y + (this->rect.getGlobalBounds().height / 2.f) - this->text.getGlobalBounds().height / 2.f     
+        x + (width / 2.f) - width / 2.f,
+        y + (height / 2.f) - height / 2.f     
     );
 
     this->state = button_state::IDLE;
@@ -28,12 +31,42 @@ Button::Button(int x, int y, int width, int height, std::string text, sf::Font *
     this->hoverColor = sf::Color(0x77777770);
     this->clickedColor = sf::Color(0x00000070);
 
-    this->rect.setFillColor(this->idleColor);
+}
+
+Button::Button(int x, int y, int width, int height, std::string text){
+    
+    sf::RectangleShape rect;
+    rect.setSize(sf::Vector2f(width, height));
+    rect.setPosition(sf::Vector2f(x,y));
+    rect.setFillColor(this->idleColor);
+    this->rects.push_back(rect);
+
+    this->font->loadFromFile("../../res/fonts/Ubuntu-R.ttf");
+    this->text.setFont(*this->font);
+    this->text.setString(text);
+    this->text.setFillColor(sf::Color::Red);
+    this->text.setCharacterSize(12);
+    this->text.setPosition(0,0);
+    this->text.setPosition(
+        x + (width / 2.f) - width / 2.f,
+        y + (height / 2.f) - height / 2.f     
+    );
+
+    this->state = button_state::IDLE;
+    this->active = false;
+
+    this->idleColor = sf::Color(0xFFFFFF70);
+    this->hoverColor = sf::Color(0x77777770);
+    this->clickedColor = sf::Color(0x00000070);
 
 }
 
+
 void Button::render(sf::RenderTarget *target){
-    target->draw(this->rect);
+    for(auto i = this->rects.begin(); i!=this->rects.end(); ++i){
+        target->draw(*i);
+    }
+
     target->draw(this->text);
 }
 
@@ -49,13 +82,20 @@ void Button::update(){
     }
 
     if(this->state == button_state::HOVER){
-        this->rect.setFillColor(this->hoverColor);
+        for(auto i = this->rects.begin(); i!=this->rects.end(); ++i){
+            i->setFillColor(this->hoverColor);
+        }
+        
     }
     else if(this->state == button_state::PRESSED_ON || this->state == button_state::PRESSED_OFF){
-        this->rect.setFillColor(this->clickedColor);
+        for(auto i = this->rects.begin(); i!=this->rects.end(); ++i){
+            i->setFillColor(this->clickedColor);
+        }
     }
     else{
-        this->rect.setFillColor(this->idleColor);
+        for(auto i = this->rects.begin(); i!=this->rects.end(); ++i){
+            i->setFillColor(this->idleColor);
+        }
     }
 
 }
@@ -67,41 +107,49 @@ void Button::addListener(Listener &l){
 void Button::notify(sf::Event e){
 
     if(e.type == sf::Event::MouseMoved){
-        if(this->rect.getGlobalBounds().contains(sf::Vector2f(e.mouseMove.x, e.mouseMove.y))){
-            switch(this->state){
-                case IDLE:
-                    this->state = button_state::HOVER;
-                    break;
-                case HOVER:
-                    this->state = button_state::HOVER;
-                    break;
-                case PRESSED_ON:
-                    this->state = button_state::PRESSED_ON;
-                    break;
-                case PRESSED_OFF:
-                    this->state = button_state::PRESSED_ON;
-                    break;
-            }
-
+        
+        bool inside = false;
+        
+        for(auto i = this->rects.begin(); i != this->rects.end(); ++i){
+            if(i->getGlobalBounds().contains(sf::Vector2f(e.mouseMove.x, e.mouseMove.y)))
+                inside = true;
         }
-        else{
+            if(inside){
+                switch(this->state){
+                    case IDLE:
+                        this->state = button_state::HOVER;
+                        break;
+                    case HOVER:
+                        this->state = button_state::HOVER;
+                        break;
+                    case PRESSED_ON:
+                        this->state = button_state::PRESSED_ON;
+                        break;
+                    case PRESSED_OFF:
+                        this->state = button_state::PRESSED_ON;
+                        break;
+                }
 
-            switch(this->state){
-                case IDLE:
-                    this->state = button_state::IDLE;
-                    break;
-                case HOVER:
-                    this->state = button_state::IDLE;
-                    break;
-                case PRESSED_ON:
-                    this->state = button_state::PRESSED_OFF;
-                    break;
-                case PRESSED_OFF:
-                    this->state = button_state::PRESSED_OFF;
-                    break;
             }
+            else{
 
-        }
+                switch(this->state){
+                    case IDLE:
+                        this->state = button_state::IDLE;
+                        break;
+                    case HOVER:
+                        this->state = button_state::IDLE;
+                        break;
+                    case PRESSED_ON:
+                        this->state = button_state::PRESSED_OFF;
+                        break;
+                    case PRESSED_OFF:
+                        this->state = button_state::PRESSED_OFF;
+                        break;
+                }
+
+            }
+        
 
     }
     else if(e.type == sf::Event::MouseButtonPressed){
@@ -161,4 +209,15 @@ bool Button::isPressed(){
     else{
         return false;
     }
+}
+
+void Button::addRect(sf::RectangleShape &r){
+    this->rects.push_back(r);
+}
+
+void Button::addRect(int x, int y, int w, int h){
+    sf::RectangleShape r;
+    r.setPosition(sf::Vector2f(x, y));
+    r.setSize(sf::Vector2f(w, h));
+    this->rects.push_back(r);
 }

@@ -12,7 +12,6 @@ typedef enum{
 } slider_state;
 
 
-
 class Slider : public Widget{
 
 public:
@@ -25,7 +24,7 @@ public:
     int getMax();
 
     void render(sf::RenderTarget *target);
-    void update(sf::Vector2f mousePos);
+    void update();
     void notify(sf::Event e);
     bool isPressed();
     
@@ -38,6 +37,8 @@ private:
     int minValue;
     bool pressed;
 
+
+    slider_state state;
     sf::Color barColor;
     sf::Color circleColor;
     sf::RectangleShape sliderBar;

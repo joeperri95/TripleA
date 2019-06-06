@@ -22,6 +22,7 @@ public:
 protected:
     int x, y;
     std::string name;
+    bool active = false;
 
 };
 

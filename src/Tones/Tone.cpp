@@ -9,6 +9,8 @@ Tone::Tone(Tone &t){
     this->channels = t.getChannels();
     this->numSamples = t.getNumSamples();
     this->sampleRate = t.getSampleRate();
+    this->samples = t.getSamples();
+
 }
 
 Tone::~Tone(){
@@ -41,7 +43,12 @@ double Tone::getDuration(){
     return this->duration;
 }
 
+double Tone::getAmplitude(){
+    return this->amplitude;
+}
+
 void Tone::setAmplitude(double amplitude){
+
 
     for(unsigned int i = 0; i < this->numSamples; i++){
         this->samples[i] = (short) ( (amplitude / this->amplitude) * this->samples[i]);

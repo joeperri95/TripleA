@@ -29,6 +29,9 @@ public:
     void update();
     void notify(sf::Event e);
     void addListener(Listener &l);
+    void addRect(sf::RectangleShape &r);
+    void addRect(int x, int y, int w, int h);
+
 
     bool isPressed();
     bool isHovering();
@@ -41,7 +44,6 @@ private:
 
     std::vector<Listener> listeners;
     std::vector<sf::RectangleShape> rects;
-    sf::RectangleShape rect;
     sf::Font *font;
     sf::Text text;
 

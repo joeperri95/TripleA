@@ -35,8 +35,61 @@
 #define A1sharp     58.27
 #define B1flat      58.27
 #define B1          61.74     
+#define C2          65.41          
+#define C2sharp     69.30
+#define D2flat      69.30
+#define D2          73.42
+#define D2sharp     77.78
+#define E2flat      77.78
+#define E2          82.41
+#define F2          87.31
+#define F2sharp     92.50
+#define G2flat      92.50
+#define G2          98.00
+#define G2sharp     103.83
+#define A2flat      G2sharp
+#define A2          110.00
+#define A2sharp     116.54
+#define B2flat      A3sharp
+#define B2          123.47    
+#define C3          130.81         
+#define C3sharp     138.59
+#define D3flat      C3sharp
+#define D3          146.83
+#define D3sharp     155.56
+#define E3flat      D3sharp
+#define E3          164.81
+#define F3          174.61
+#define F3sharp     185.00
+#define G3flat      F3sharp
+#define G3          196.00
+#define G3sharp     207.65
+#define A3flat      G3sharp
+#define A3          220.00
+#define A3sharp     233.08
+#define B3flat      B3flat
+#define B3          246.94    
+#define C4          261.63         
+#define C4sharp     277.18
+#define D4flat      C4sharp
+#define D4          293.63
+#define D4sharp     311.13
+#define E4flat      D4sharp
+#define E4          329.63
+#define F4          349.23
+#define F4sharp     369.99
+#define G4flat      F4sharp
+#define G4          392.00
+#define G4sharp     415.30
+#define A4flat      G4sharp
+#define A4          440.00
+#define A4sharp     466.16
+#define B4flat      B4flat
+#define B4          493.88    
 
 
 
+
+#define CMiddle     440
 
 #endif

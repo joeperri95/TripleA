@@ -16,42 +16,28 @@ Slider::Slider(int *value, int maxValue, int minValue, int x, int y, int width, 
     this->sliderBar.setSize(sf::Vector2f(width, height));
     this->sliderBar.setFillColor(this->barColor);
     this->sliderCircle.setRadius(5);
-    
+    this->state = slider_state::SLIDER_IDLE;
 
     float percent = (float) *(this->value) / this->maxValue;
     int offset = (int) (percent * width) + x - this->sliderCircle.getRadius();
-
+ 
     this->sliderCircle.setPosition(sf::Vector2f(offset, y + (height / 2) - this->sliderCircle.getRadius()));
     this->sliderCircle.setFillColor(this->circleColor);
 
 }
 
 
-void Slider::update(sf::Vector2f mousePos){
-/* 
-    if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
-        if(this->sliderCircle.getGlobalBounds().contains(mousePos)){
-            this->pressed = true;
-        }
-        else{
-            if(this->pressed){
-                int tempValue = mousePos.x - this->sliderBar.getPosition().x;
-                this->setValue(tempValue);
-            }
-        }
-
-    }
-    else{
-        this->pressed = false;
-    }
-
-    if(this->pressed == true){
+void Slider::update(){
+    if(this->isPressed() == true){
         this->sliderCircle.setFillColor(sf::Color(0x00FF00FF));
+    }
+    else if(this->state == slider_state::SLIDER_HOVER){
+        this->sliderCircle.setFillColor(sf::Color(0x007700FF));
     }
     else{
         this->sliderCircle.setFillColor(this->circleColor);
     }
- */
+
 }
 
 void Slider::render(sf::RenderTarget *target){
@@ -61,7 +47,11 @@ void Slider::render(sf::RenderTarget *target){
 }
 
 bool Slider::isPressed(){
-    return this->pressed;
+    if(this->state == slider_state::SLIDER_CLICKED_ON || this->state == slider_state::SLIDER_CLICKED_OFF){
+        return true;
+    }
+
+    return false;
 }
 
 void Slider::setValue(int value){
@@ -85,34 +75,96 @@ void Slider::setValue(int value){
 void Slider::notify(sf::Event e){
 
     if(e.type == sf::Event::MouseMoved){
-        if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
-            if(this->sliderCircle.getGlobalBounds().contains(sf::Vector2f(e.mouseMove.x, e.mouseMove.y))){
-                this->pressed = true;
-            }
-            else{
-                if(this->pressed){
-                    int tempValue = e.mouseMove.x - this->sliderBar.getPosition().x;
-                    this->setValue(tempValue);
-                }
-            }
-
-        }
-        else{
-            this->pressed = false;
-        }
-
-        if(this->pressed == true){
-            this->sliderCircle.setFillColor(sf::Color(0x00FF00FF));
-        }
-        else{
-            this->sliderCircle.setFillColor(this->circleColor);
-        }
-    }
-    else if(e.type == sf::Event::MouseLeft){
         
+        switch(this->state){
+            case slider_state::SLIDER_IDLE:
+                if(this->sliderCircle.getGlobalBounds().contains(e.mouseMove.x, e.mouseMove.y)){
+                    this->state = slider_state::SLIDER_HOVER;
+                }
+                else{
+                    this->state = slider_state::SLIDER_IDLE;
+                }
+                break;
+            case slider_state::SLIDER_HOVER:
+                if(this->sliderCircle.getGlobalBounds().contains(e.mouseMove.x, e.mouseMove.y)){
+                    this->state = slider_state::SLIDER_HOVER;
+                }
+                else{
+                    this->state = slider_state::SLIDER_IDLE;
+                }
+                break;
+            case slider_state::SLIDER_CLICKED_ON:
+                if(this->sliderCircle.getGlobalBounds().contains(e.mouseMove.x, e.mouseMove.y)){
+                    this->state = slider_state::SLIDER_CLICKED_ON;
+                }
+                else{
+                    this->state = slider_state::SLIDER_CLICKED_OFF;
+                }
 
+
+               
+                break;
+            case slider_state::SLIDER_CLICKED_OFF:
+                if(this->sliderCircle.getGlobalBounds().contains(e.mouseMove.x, e.mouseMove.y)){
+                    this->state = slider_state::SLIDER_CLICKED_ON;
+                }
+                else{
+                    this->state = slider_state::SLIDER_CLICKED_ON;
+                }
+                
+                
+                break;
+
+        }
+
+        if(this->isPressed()){
+            int tempValue = e.mouseMove.x - this->sliderBar.getPosition().x;
+            this->setValue(tempValue);
+
+            
+        }
 
     }
+
+    else if(e.type == sf::Event::MouseButtonPressed){
+        if(e.mouseButton.button == sf::Mouse::Left){
+            switch(this->state){
+                case slider_state::SLIDER_IDLE:
+                    this->state = slider_state::SLIDER_IDLE;
+                    break;
+                case slider_state::SLIDER_HOVER:
+                    this->state = slider_state::SLIDER_CLICKED_ON;
+                    break;
+                case slider_state::SLIDER_CLICKED_ON:
+                    this->state = slider_state::SLIDER_CLICKED_ON;
+                    break;
+                case slider_state::SLIDER_CLICKED_OFF:
+                    this->state = slider_state::SLIDER_CLICKED_OFF;
+                    break;
+            }
+        }
+
+    }
+
+    else if(e.type == sf::Event::MouseButtonReleased){
+        if(e.mouseButton.button == sf::Mouse::Left){
+            switch(this->state){
+                case slider_state::SLIDER_IDLE:
+                    this->state = slider_state::SLIDER_IDLE;
+                    break;
+                case slider_state::SLIDER_HOVER:
+                    this->state = slider_state::SLIDER_HOVER;
+                    break;
+                case slider_state::SLIDER_CLICKED_ON:
+                    this->state = slider_state::SLIDER_HOVER;
+                    break;
+                case slider_state::SLIDER_CLICKED_OFF:
+                    this->state = slider_state::SLIDER_IDLE;
+                    break;
+
+            }
+        }
+    }   
 
 }
 

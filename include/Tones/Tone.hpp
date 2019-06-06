@@ -29,7 +29,8 @@ public:
     unsigned int getChannels();
     unsigned int getNumSamples();
     double getDuration();
-    
+    double getAmplitude();
+
     short *getSamples();
     short *getNSamples(int start, int n);
 

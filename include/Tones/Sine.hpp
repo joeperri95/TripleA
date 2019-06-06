@@ -16,8 +16,11 @@ public:
         double amplitude, 
         double freq);
     
+    Sine(Sine &other);
+
     ~Sine();
     
+    double getFrequency();
 
 private:
     double frequency;
