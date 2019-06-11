@@ -75,7 +75,7 @@ void Button::update(){
     if(this->active){
 
         for(auto i = this->listeners.begin(); i != this->listeners.end(); ++i){
-            i->Execute();
+            i->executeAsBackgroundThread();
         }
 
         this->active = false;

@@ -30,6 +30,7 @@ private:
     int *value;
     sf::CircleShape knobCircle;
     sf::RectangleShape line;    
+    double angle;
     knob_state state;
 
 };

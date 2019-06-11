@@ -32,6 +32,7 @@ App::~App(){
 
 void App::init(){
     this->window = new sf::RenderWindow(sf::VideoMode(this->width,this->height), this->title);
+    
 }
 
 void App::render(){
@@ -55,6 +56,8 @@ void App::render(){
         i->render(this->window);
     }
 
+    this->dropdown.render(this->window);
+
     this->window->display();
 }
 
@@ -73,6 +76,7 @@ void App::update(){
             i->notify(this->event);
         }
 
+        this->dropdown.notify(this->event);
     } 
     
     sf::Vector2f floatPos( (float) sf::Mouse::getPosition(*this->window).x ,sf::Mouse::getPosition(*this->window).y);
@@ -88,6 +92,8 @@ void App::update(){
     for(auto i = this->knobs.begin(); i != this->knobs.end(); ++i){
         i->update();
     }
+
+    this->dropdown.update();
 
 }
 
@@ -119,6 +125,10 @@ void App::addImage(std::string s, int x, int y){
     spr.setPosition(x, y);
     this->images.push_back(spr);
     
+};
+
+void App::addDropDown(DropDownMenuBar &dropdown){
+    this->dropdown = dropdown;
 }
 
 void App::addKnob(Knob &k){

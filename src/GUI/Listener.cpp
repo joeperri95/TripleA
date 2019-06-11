@@ -10,8 +10,15 @@ Listener::~Listener(){
     
 }
 
-void Listener::Execute(){
+void Listener::execute(){
 
     (this->function)(this->args);
+
+}
+
+void Listener::executeAsBackgroundThread(){
+
+    std::thread th(this->function, this->args);
+    th.detach();
 
 }

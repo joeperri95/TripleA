@@ -1,6 +1,8 @@
 #ifndef __LISTENER_H__
 #define __LISTENER_H__
 
+#include <thread>
+
 class Listener{
 
 public:
@@ -8,8 +10,8 @@ public:
     Listener(void (*function)(void *args), void *args);
     ~Listener();
 
-    void Execute();
-
+    void execute();
+    void executeAsBackgroundThread();
 
 private:
 

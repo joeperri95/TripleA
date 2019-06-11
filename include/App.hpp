@@ -7,6 +7,7 @@
 #include "GUI/Slider.hpp"
 #include "GUI/Oscilloscope.hpp"
 #include "GUI/Widget.hpp"
+#include "GUI/DropDownMenuBar.hpp"
 
 class App{
 
@@ -25,6 +26,7 @@ public:
     void addSlider(Slider &s);
     void addText(sf::Text, int x, int y);
     void addKnob(Knob &k);
+    void addDropDown(DropDownMenuBar &bar);
 
     void addImage(sf::Texture tex, int x, int y);
     void addImage(std::string str, int x, int y);
@@ -42,6 +44,8 @@ private:
     std::vector<Button> buttons;
     std::vector<Slider> sliders;
     std::vector<Knob> knobs;
+    
+    DropDownMenuBar dropdown;
 
     std::vector<sf::Sprite> images;
     std::vector<sf::Texture> textures;
