@@ -22,7 +22,7 @@ Currently only supports linux sound with ALSA
 * filter builder (low priority)
 
 
-#UPDATES
+# UPDATES
 
 ## 2019-06-18
 

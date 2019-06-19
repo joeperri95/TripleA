@@ -17,8 +17,8 @@ typedef enum{
 class DropDownItem : public Widget{
 
 public:
-    DropDownItem(int height, int width, std::string name);
-    DropDownItem(std::string name, int height);
+    DropDownItem(int width, int height, std::string name);
+    DropDownItem(int height, std::string name);
     ~DropDownItem();
 
     std::string getName();
@@ -34,6 +34,7 @@ public:
     dropdown_state getState();
     int getWidth();
     int getHeight();
+    void setVisible();
 
 private:
 
@@ -41,9 +42,10 @@ private:
     int height;
     int width;
     bool active;
+    bool visible;
 
     //only update on state change
-    bool stateChangeFlag;
+    bool stateChange;
     
     sf::RectangleShape rect;
     std::string name;

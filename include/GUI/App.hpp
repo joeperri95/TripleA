@@ -32,6 +32,8 @@ public:
     void addImage(std::string str, int x, int y);
     void addText(sf::Text);
 
+    int getHeight();
+    int getWidth();
 
 private:
     sf::RenderWindow *window;

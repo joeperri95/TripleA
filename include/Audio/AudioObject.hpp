@@ -7,7 +7,7 @@ public:
 
     AudioObject(){};
     virtual ~AudioObject(){};
-    virtual short callback(double t) {};
+    virtual short callback(double t) = 0;
 
     double getOnTime(){return this->onTime;};
     double getOffTime(){return this->offTime;};

@@ -1,6 +1,6 @@
 CC = g++
 
-MAINNAME = 
+MAINNAME = main.cpp
 
 SRCPATH = src/
 INCLUDEPATH = include/
@@ -17,7 +17,7 @@ GUIPATH = GUI/
 GUISRCFILES = App.cpp Button.cpp DropDownItem.cpp DropDownMenu.cpp DropDownMenuBar.cpp Knob.cpp Listener.cpp Oscilloscope.cpp Slider.cpp Widget.cpp 
 GUISRC = $(addprefix $(addprefix $(SRCPATH), $(GUIPATH)), $(GUISRCFILES))
 
-SRC = main2.cpp $(AUDIOSRC) $(GUISRC) $(EFFECTSRC)
+SRC = $(MAINNAME) $(AUDIOSRC) $(GUISRC) $(EFFECTSRC)
 
 AUDIODEPFILES = AlsaDevice.hpp AudioObject.hpp Notes.hpp PCMTone.hpp Sawtooth.hpp Sine.hpp Square.hpp Triangle.hpp Tone.hpp
 AUDIODEPS = $(addprefix $(addprefix $(INCLUDEPATH), $(AUDIOPATH)), $(AUDIODEPFILES))

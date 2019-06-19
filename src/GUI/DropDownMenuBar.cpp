@@ -1,4 +1,4 @@
-#include "../../include/GUI/DropDownMenuBar.hpp"
+#include "GUI/DropDownMenuBar.hpp"
 
 
 DropDownMenuBar::DropDownMenuBar(){
@@ -10,6 +10,7 @@ DropDownMenuBar::~DropDownMenuBar(){
 }
 
 DropDownMenuBar::DropDownMenuBar(int height, int width){
+    
     this->barHeight = height;
     this->barWidth = width;
     this->nextMenuPos = 0;
@@ -18,6 +19,7 @@ DropDownMenuBar::DropDownMenuBar(int height, int width){
     this->rect.setFillColor(sf::Color(0xFF0000FF));
     this->numberOfItems = 0;
     this->state = dropdown_state::DROPDOWN_IDLE;
+
 }
 
 void DropDownMenuBar::addDropDownItem(DropDownItem &item){

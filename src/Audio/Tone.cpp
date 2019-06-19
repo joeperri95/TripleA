@@ -8,10 +8,6 @@ Tone::~Tone(){
 
 }
 
-short Tone::callback(double t){
-
-}
-
 double Tone::getAmplitude(){
     return this->amplitude;
 }

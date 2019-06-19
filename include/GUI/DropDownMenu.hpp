@@ -13,7 +13,7 @@ public:
     
     ~DropDownMenu();
     DropDownMenu(int height, std::string name);
-    DropDownMenu(int height, int width, std::string name);
+    DropDownMenu(int width , int height, std::string name);
 
     std::string getName();
     void addItem(DropDownItem &item);
@@ -33,10 +33,12 @@ private:
     int boxWidth;
     int buttonHeight;
     int buttonWidth;
+    bool stateChange;
 
     dropdown_state state;
     int numberOfItems;
     sf::RectangleShape rect;
+    sf::RectangleShape boxRect;
     std::string name;
     sf::Text text;
     sf::Font font;

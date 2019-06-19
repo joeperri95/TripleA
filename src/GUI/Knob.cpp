@@ -40,4 +40,19 @@ void Knob::update(){
 
 void Knob::notify(sf::Event e){
 
+    switch(e.type){
+        case sf::Event::MouseMoved:
+
+        break;
+        case sf::Event::MouseButtonPressed:
+
+        break;
+        case sf::Event::MouseButtonReleased:
+
+        break;
+        default:
+
+        break;
+    }
+
 }

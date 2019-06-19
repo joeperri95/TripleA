@@ -1,4 +1,4 @@
-#include "../../include/GUI/DropDownMenu.hpp"
+#include "GUI/DropDownMenu.hpp"
 
 #include <iostream>
 
@@ -22,6 +22,9 @@ DropDownMenu::DropDownMenu(int height, std::string name){
     this->rect.setFillColor(sf::Color(0xFF7070FF));
     this->boxHeight = this->buttonHeight;
     this->boxWidth = 0;
+    this->x = 0;
+    this->y = 0;
+    this->stateChange = false;
 
 }
 
@@ -29,7 +32,7 @@ DropDownMenu::~DropDownMenu(){
 
 }
 
-DropDownMenu::DropDownMenu(int height, int width, std::string name){
+DropDownMenu::DropDownMenu(int width, int height, std::string name){
     this->buttonHeight = height;
     this->buttonWidth = width;
     this->name = name;
@@ -48,6 +51,9 @@ DropDownMenu::DropDownMenu(int height, int width, std::string name){
     this->rect.setFillColor(sf::Color(0xFF7070FF));
     this->boxHeight = this->buttonHeight;
     this->boxWidth = 0;
+    this->x = 0;
+    this->y = 0;
+    this->stateChange = false;
 
 }
 
@@ -58,9 +64,9 @@ std::string DropDownMenu::getName(){
 void DropDownMenu::addItem(DropDownItem &item){
     this->numberOfItems++;
 
-    this->boxHeight += item.getHeight();
     item.setPosition(this->x, this->y + this->boxHeight);
-    
+    this->boxHeight += item.getHeight();
+
     //one width per submenu 
     if(item.getWidth() > this->boxWidth){
         this->boxWidth = item.getWidth();
@@ -73,7 +79,7 @@ void DropDownMenu::addItem(DropDownItem &item){
 }
 
 void DropDownMenu::addItem(std::string text){
-    DropDownItem item(text, this->buttonHeight);
+    DropDownItem item(this->buttonHeight, name);
     this->numberOfItems++;
 
     this->boxHeight += item.getHeight();
@@ -99,36 +105,73 @@ void DropDownMenu::setPosition(int x, int y){
     this->y = y;
     this->rect.setPosition(x,y);
     this->text.setPosition(x + 5,y + 5);
+
+    for(auto i = this->items.begin(); i != this->items.end(); ++i){
+        i->second.setPosition(x , i->second.getY());
+    }
+
 }
 
 void DropDownMenu::update(){
-    switch(this->state){
-        case dropdown_state::DROPDOWN_IDLE:
-            this->rect.setFillColor(sf::Color(0xFF7070FF));
-        break;
-        case dropdown_state::DROPDOWN_HOVER:
-            this->rect.setFillColor(sf::Color::Blue);
-        break;
-        case dropdown_state::DROPDOWN_HIDDEN:
 
-        break;
-        case dropdown_state::DROPDOWN_CLICKED_ON:
-            this->rect.setFillColor(sf::Color(0xCF6060FF));
-            this->rect.setOutlineColor(sf::Color::Black);
-            this->rect.setOutlineThickness(1);
-        break;
-        case dropdown_state::DROPDOWN_CLICKED_OFF:
-            this->rect.setFillColor(sf::Color(0xCF6060FF));
-            this->rect.setOutlineColor(sf::Color::Black);
-            this->rect.setOutlineThickness(1);
-        break;
+    if(this->stateChange){
+        
+        this->stateChange = false;
+
+        switch(this->state){
+            case dropdown_state::DROPDOWN_IDLE:
+                this->rect.setFillColor(sf::Color(0xFF7070FF));          
+            
+            break;
+            case dropdown_state::DROPDOWN_HOVER:
+                this->rect.setFillColor(sf::Color::Blue);
+                
+                for(auto i = this->items.begin(); i != this->items.end(); ++i){
+                    i->second.setState(dropdown_state::DROPDOWN_IDLE);
+                }
+
+            break;
+            case dropdown_state::DROPDOWN_HIDDEN:
+
+            break;
+            case dropdown_state::DROPDOWN_CLICKED_ON:
+                this->rect.setFillColor(sf::Color(0xCF6060FF));
+                this->rect.setOutlineColor(sf::Color::Black);
+                this->rect.setOutlineThickness(1);
+
+            break;
+            case dropdown_state::DROPDOWN_CLICKED_OFF:
+                this->rect.setFillColor(sf::Color(0xCF6060FF));
+                this->rect.setOutlineColor(sf::Color::Black);
+                this->rect.setOutlineThickness(1);
+            break;
+
+        }
+    }
+
+    
+    //this should be ready to update not just on state change
+    bool hideFlag = true; 
+
+    if(this->state == dropdown_state::DROPDOWN_IDLE){
+        for(auto i = this->items.begin(); i != this->items.end(); ++i){
+            if(i->second.getState() != dropdown_state::DROPDOWN_IDLE){
+                hideFlag = false;
+                break;
+            }
+        }
+
+        if(hideFlag){
+            for(auto i = this->items.begin(); i != this->items.end(); ++i){
+                i->second.setState(dropdown_state::DROPDOWN_HIDDEN);
+            }    
+        }
 
     }
 
     for(auto i = this->items.begin(); i != this->items.end(); ++i){
         i->second.update();
     }
-
 }
 
 void DropDownMenu::render(sf::RenderTarget *target){
@@ -158,6 +201,7 @@ void DropDownMenu::notify(sf::Event e){
                 switch(this->state){
                     case dropdown_state::DROPDOWN_IDLE:
                         this->state = dropdown_state::DROPDOWN_HOVER;
+                        this->stateChange = true;
                     break;
                     case dropdown_state::DROPDOWN_HOVER:
                         //nothing happens
@@ -170,6 +214,7 @@ void DropDownMenu::notify(sf::Event e){
                     break;
                     case dropdown_state::DROPDOWN_CLICKED_OFF:
                         this->state = dropdown_state::DROPDOWN_CLICKED_ON;
+                        this->stateChange = true;
                     break;
 
                 }
@@ -181,6 +226,7 @@ void DropDownMenu::notify(sf::Event e){
                     break;
                     case dropdown_state::DROPDOWN_HOVER:
                         this->state = dropdown_state::DROPDOWN_IDLE;
+                        this->stateChange = true;
                     break;
                     case dropdown_state::DROPDOWN_HIDDEN:
                         //should never happen
@@ -188,6 +234,7 @@ void DropDownMenu::notify(sf::Event e){
                     case dropdown_state::DROPDOWN_CLICKED_ON:
                         //nothing happens
                         this->state = dropdown_state::DROPDOWN_CLICKED_OFF;
+                        this->stateChange = true;
                     break;
                     case dropdown_state::DROPDOWN_CLICKED_OFF:
                         
@@ -207,7 +254,8 @@ void DropDownMenu::notify(sf::Event e){
                         //nothing happens
                     break;
                     case dropdown_state::DROPDOWN_HOVER:
-                        this->state = dropdown_state::DROPDOWN_CLICKED_ON;                
+                        this->state = dropdown_state::DROPDOWN_CLICKED_ON;
+                        this->stateChange = true;                
                     break;
                     case dropdown_state::DROPDOWN_HIDDEN:
                         //should never happen
@@ -238,9 +286,11 @@ void DropDownMenu::notify(sf::Event e){
                     break;
                     case dropdown_state::DROPDOWN_CLICKED_ON:
                         this->state = dropdown_state::DROPDOWN_HOVER;
+                        this->stateChange = true;
                     break;
                     case dropdown_state::DROPDOWN_CLICKED_OFF:
                         this->state = dropdown_state::DROPDOWN_IDLE;
+                        this->stateChange = true;
                     break;
 
                 }
@@ -257,7 +307,6 @@ void DropDownMenu::notify(sf::Event e){
                 
         i->second.notify(e);
     }
-
 
 }
 

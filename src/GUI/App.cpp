@@ -142,3 +142,11 @@ void App::addButton(Button &b){
 void App::addSlider(Slider &s){
     this->sliders.push_back(s);
 }
+
+int App::getHeight(){
+    return this->height;
+}
+
+int App::getWidth(){
+    return this->width;
+}

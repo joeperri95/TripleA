@@ -21,7 +21,7 @@ public:
     Tone();
     virtual ~Tone();
 
-    virtual short callback(double t);     
+    virtual short callback(double t) = 0;     
     double getAmplitude();
     void setAmplitude(double amp);
     void addEffect(Effect *e);
