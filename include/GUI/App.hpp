@@ -31,11 +31,12 @@ public:
     void addImage(sf::Texture tex, int x, int y);
     void addImage(std::string str, int x, int y);
     void addText(sf::Text);
+    void addWidget(Widget *w);
 
     int getHeight();
     int getWidth();
 
-private:
+protected:
     sf::RenderWindow *window;
     sf::Event event;
     
@@ -47,6 +48,8 @@ private:
     std::vector<Slider> sliders;
     std::vector<Knob> knobs;
     
+    std::vector<Widget *> widgets;
+
     DropDownMenuBar dropdown;
 
     std::vector<sf::Sprite> images;

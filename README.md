@@ -9,17 +9,11 @@ Currently only supports linux sound with ALSA
 * figure out how to implement nondeterministic effects
 * refactor + commit piano applet and create more applets
 * implement knob controls
-* fix DropDownMenu to show items
-* investigate windows/mac audio libraries
-    - PortAudio (seems to be the winner)
-    - asio 
-    - directSound  
-    - coreAudio (mac)
-    - openAL
-    - SDL / SFML
+* implement portaudio device for windows users
 * create demo app for github
 * give widgets dedicated textures instead of basic colors
 * filter builder (low priority)
+* update button for arbitrary shape
 
 
 # UPDATES

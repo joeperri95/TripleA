@@ -1,6 +1,6 @@
 #include "../../include/Audio/AlsaDevice.hpp"
 
-#define DEBUG 0
+//#define DEBUG 0
 
 AlsaDevice::AlsaDevice(){
 
@@ -130,12 +130,10 @@ void AlsaDevice::init(){
     this->writeSamples(this->buffer , this->periodSize);
     
     this->cleanedUp = false;
-
-    this->audioThread = std::thread(&AlsaDevice::threadMain, this);
     
     this->threadActive = true;
     this->playing = true;
-
+    this->audioThread = std::thread(&AlsaDevice::threadMain, this); 
     #ifdef DEBUG
     printf("initialized at %f\n", this->time);
     #endif
@@ -239,6 +237,10 @@ void AlsaDevice::setUserData(void *userData){
 }
 
 */
+
+void AlsaDevice::setAudioObject(AudioObject *audio){
+    this->audio = audio;
+}
 
 void AlsaDevice::threadMain(){
 

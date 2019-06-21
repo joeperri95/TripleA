@@ -1,4 +1,4 @@
-#include "../../include/GUI/Slider.hpp"
+#include "GUI/Slider.hpp"
 #include <iostream>
 
 Slider::~Slider(){

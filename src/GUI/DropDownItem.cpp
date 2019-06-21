@@ -14,7 +14,7 @@ DropDownItem::DropDownItem(int width, int height, std::string name){
     this->state = dropdown_state::DROPDOWN_HIDDEN;
 
     this->rect.setSize(sf::Vector2f(width, height));
-    this->rect.setFillColor(sf::Color(0x00FF00FF));
+    this->rect.setFillColor(sf::Color(sf::Color::Cyan));
 
     sf::Font f;
     f.loadFromFile("res/fonts/Ubuntu-R.ttf");
@@ -36,7 +36,7 @@ DropDownItem::DropDownItem(int height, std::string name){
     this->width = this->text.getGlobalBounds().width + 10;
     this->height = height;
     this->rect.setSize(sf::Vector2f(this->width, this->height));
-    this->rect.setFillColor(sf::Color(0x00FF00FF));
+    this->rect.setFillColor(sf::Color(sf::Color::Cyan));
     this->stateChange = false;
 }
 

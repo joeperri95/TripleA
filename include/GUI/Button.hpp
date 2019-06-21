@@ -23,6 +23,7 @@ public:
 
     Button(int x, int y, int width, int height, std::string text);
     Button(int x, int y, int width, int height, std::string text, sf::Font *font);
+    Button();
     ~Button();
 
     void render(sf::RenderTarget *target);
@@ -44,6 +45,8 @@ private:
 
     std::vector<Listener> listeners;
     std::vector<sf::RectangleShape> rects;
+    
+    sf::Shape *buttonShape;
     sf::Font *font;
     sf::Text text;
 

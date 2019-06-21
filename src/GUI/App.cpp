@@ -1,13 +1,7 @@
-#include "../../include/GUI/App.hpp"
+#include "GUI/App.hpp"
 
 App::App(){
-    
-    this->title = "App";
-    this->height = 600;
-    this->width = 800;
-    this->init();
-
-    
+        
 }
 
 App::App(std::string title){
@@ -56,6 +50,10 @@ void App::render(){
         i->render(this->window);
     }
 
+    for(auto i = this->widgets.begin(); i != this->widgets.end(); ++i){
+        (*i)->render(this->window);
+    }
+
     this->dropdown.render(this->window);
 
     this->window->display();
@@ -76,6 +74,14 @@ void App::update(){
             i->notify(this->event);
         }
 
+        for(auto i = this->knobs.begin(); i != this->knobs.end(); ++i){
+            i->notify(this->event);
+        }
+
+        for(auto i = this->widgets.begin(); i != this->widgets.end(); ++i){
+            (*i)->notify(this->event);
+        }
+
         this->dropdown.notify(this->event);
     } 
     
@@ -91,6 +97,10 @@ void App::update(){
 
     for(auto i = this->knobs.begin(); i != this->knobs.end(); ++i){
         i->update();
+    }
+
+    for(auto i = this->widgets.begin(); i != this->widgets.end(); ++i){
+        (*i)->update();
     }
 
     this->dropdown.update();
@@ -141,6 +151,10 @@ void App::addButton(Button &b){
 
 void App::addSlider(Slider &s){
     this->sliders.push_back(s);
+}
+
+void App::addWidget(Widget *w){
+    this->widgets.push_back(w);
 }
 
 int App::getHeight(){

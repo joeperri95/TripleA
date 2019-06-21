@@ -11,6 +11,8 @@ public:
 
     double getOnTime(){return this->onTime;};
     double getOffTime(){return this->offTime;};
+    void setOnTime(double d){this->onTime = d;};
+    void setOffTime(double d){this->offTime = d;};
 
 protected:
 

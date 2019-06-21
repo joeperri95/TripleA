@@ -1,16 +1,16 @@
 CC = g++
 
-MAINNAME = main.cpp
+MAINNAME = main.cpp sequencer.cpp
 
 SRCPATH = src/
 INCLUDEPATH = include/
 
 AUDIOPATH = Audio/
-AUDIOSRCFILES = AlsaDevice.cpp PCMTone.cpp Sawtooth.cpp Sine.cpp Square.cpp Triangle.cpp Tone.cpp
+AUDIOSRCFILES = AlsaDevice.cpp PCMTone.cpp Sawtooth.cpp Sine.cpp Square.cpp Triangle.cpp Tone.cpp Track.cpp 
 AUDIOSRC = $(addprefix $(addprefix $(SRCPATH), $(AUDIOPATH)), $(AUDIOSRCFILES))
 
 EFFECTPATH = Audio/Effects/
-EFFECTSRCFILES = DecayEffect.cpp Downsample.cpp FIR.cpp Reverb.cpp Tremolo.cpp Vibrato.cpp 
+EFFECTSRCFILES = DecayEffect.cpp Downsample.cpp FIR.cpp Reverb.cpp Tremolo.cpp Vibrato.cpp Envelope.cpp
 EFFECTSRC  = $(addprefix $(addprefix $(SRCPATH), $(EFFECTPATH)), $(EFFECTSRCFILES))
 
 GUIPATH = GUI/
@@ -19,17 +19,17 @@ GUISRC = $(addprefix $(addprefix $(SRCPATH), $(GUIPATH)), $(GUISRCFILES))
 
 SRC = $(MAINNAME) $(AUDIOSRC) $(GUISRC) $(EFFECTSRC)
 
-AUDIODEPFILES = AlsaDevice.hpp AudioObject.hpp Notes.hpp PCMTone.hpp Sawtooth.hpp Sine.hpp Square.hpp Triangle.hpp Tone.hpp
+AUDIODEPFILES = AlsaDevice.hpp AudioObject.hpp Notes.hpp PCMTone.hpp Sawtooth.hpp Sine.hpp Square.hpp Triangle.hpp Tone.hpp Audio.hpp
 AUDIODEPS = $(addprefix $(addprefix $(INCLUDEPATH), $(AUDIOPATH)), $(AUDIODEPFILES))
 
-GUIDEPFILES = App.hpp Button.hpp DropDownItem.hpp DropDownMenu.hpp DropDownMenuBar.hpp Knob.hpp Listener.hpp Oscilloscope.hpp Slider.hpp Widget.hpp 
+GUIDEPFILES = App.hpp Button.hpp DropDownItem.hpp DropDownMenu.hpp DropDownMenuBar.hpp Knob.hpp Listener.hpp Oscilloscope.hpp Slider.hpp Widget.hpp GUI.hpp
 GUIDEPS = $(addprefix $(addprefix $(INCLUDEPATH), $(GUIPATH)), $(GUIDEPFILES))
 
-EFFECTDEPFILES = DecayEffect.hpp Downsample.hpp FIR.hpp Reverb.hpp Tremolo.hpp Vibrato.hpp 
+EFFECTDEPFILES = DecayEffect.hpp Downsample.hpp FIR.hpp Reverb.hpp Tremolo.hpp Vibrato.hpp Envelope.hpp
 EFFECTDEPS = $(addprefix $(addprefix $(INCLUDEPATH), $(EFFECTPATH)), $(EFFECTDEPFILES))
 
-DEPS = $(MAINNAME) $(AUDIODEPS) $(GUIDEPS) $(EFFECTDEPS) 
-CFLAGS = -Wall  --std=c++11 -I$(INCLUDEPATH)
+DEPS =  $(AUDIODEPS) $(GUIDEPS) $(EFFECTDEPS) 
+CFLAGS = -Wall -g --std=c++11 -I$(INCLUDEPATH)
 
 OBJDIR = ./obj
 OBJECTS = $(patsubst %.cpp, $(OBJDIR)/%.o, $(SRC))

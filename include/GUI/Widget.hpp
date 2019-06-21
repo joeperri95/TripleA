@@ -15,14 +15,16 @@ public:
     int getX();
     int getY();    
 
-    virtual void update();
-    virtual void render(sf::RenderTarget *target);
-    virtual void notify(sf::Event e);
+    virtual void update() = 0;
+    virtual void render(sf::RenderTarget *target) = 0;
+    virtual void notify(sf::Event e) = 0;
+
+    void addTexture(std::string name, std::string filepath);
 
 protected:
     int x, y;
     std::string name;
-    bool active = false;
+    std::map<std::string , sf::Texture *> textures;
 
 };
 

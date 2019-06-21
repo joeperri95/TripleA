@@ -12,10 +12,12 @@ class Sine : public Tone {
 public:
     Sine(
         double onTime,
-        double offTIme, 
+        double offTime, 
         double amplitude, 
         double freq);
     
+    Sine();
+
     ~Sine();
     
     short callback(double t);

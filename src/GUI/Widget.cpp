@@ -1,11 +1,7 @@
-#include "../../include/GUI/Widget.hpp"
+#include "GUI/Widget.hpp"
 
 Widget::Widget(){}
 Widget::~Widget(){}
-
-void Widget::notify(sf::Event e){}
-void Widget::render(sf::RenderTarget *target){}
-void Widget::update(){}
 
 int Widget::getX(){
     return this->x;
@@ -13,4 +9,12 @@ int Widget::getX(){
 
 int Widget::getY(){
     return this->y;
+}
+
+void Widget::addTexture(std::string str, std::string filename){
+
+    sf::Texture t;
+    t.loadFromFile(filename);
+
+    this->textures.insert(std::pair<std::string, sf::Texture *>(str, new sf::Texture(t)));
 }
