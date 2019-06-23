@@ -18,3 +18,4 @@
 #include "Effects/Reverb.hpp"
 #include "Effects/Tremolo.hpp"
 #include "Effects/Vibrato.hpp"
+#include "Effects/Decimate.hpp"

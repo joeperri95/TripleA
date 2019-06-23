@@ -2,12 +2,17 @@
 
 #include <iostream>
 
-FIR::FIR(int numberOfTaps, float* bValues){
+FIR::FIR(int numberOfTaps, double* bValues){
+    
     this->numberOfTaps = numberOfTaps;
     this->bValues = bValues;
-    this->taps = (float *) malloc( this->numberOfTaps * sizeof(float));
-    memset(this->taps, 0, this->numberOfTaps * sizeof(float));
+    this->taps = (double *) malloc( this->numberOfTaps * sizeof(float));
+    memset(this->taps, 0, this->numberOfTaps * sizeof(double));
 
+}
+
+FIR::~FIR(){
+    free(this->taps);
 }
 
 void FIR::apply(double t, short *sample){

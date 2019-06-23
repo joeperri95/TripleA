@@ -1,5 +1,7 @@
 #include "sequencer.hpp"
 
+
+
 Sequencer::Sequencer(int numButtons, double stepTime){
     this->stepTime = stepTime;
     this->numButtons = numButtons;
@@ -19,18 +21,9 @@ Sequencer::~Sequencer(){
 
 void Sequencer::init(){
 
-    #define BUTTON_WIDTH 30
-    #define BUTTON_HEIGHT 20
-    #define WINDOW_WIDTH 400
-    #define WINDOW_HEIGHT 200
-    #define SPACER 3
-    #define X_OFFSET 20
-    #define Y_OFFSET 20
-
     this->currentButton = 0;
     this->track = new Track(this->numButtons * this->stepTime);
     this->track->setLoop(true);
-    this->track->addEffect(new Tremolo(0.2, 20));
 
     this->dev = new AlsaDevice("default", 44100, 2, 512, 2);
     
@@ -44,7 +37,7 @@ void Sequencer::init(){
 
     for(int j = 0; j < rows; j++){
         for(int i = 0; i < this->numButtons; i++){
-            this->buttons.insert(std::pair<int, seqButton*>(i, new seqButton(X_OFFSET + i * (BUTTON_WIDTH + SPACER), Y_OFFSET , BUTTON_WIDTH, BUTTON_HEIGHT)));
+            this->buttons.insert(std::pair<int, seqButton*>(i, new seqButton(X_OFFSET + i * (BUTTON_WIDTH + SPACER), Y_OFFSET, BUTTON_WIDTH, BUTTON_HEIGHT)));
             this->buttonStates.insert(std::pair<int, bool>(i, false));
         }
     }
@@ -55,9 +48,11 @@ void Sequencer::render(sf::RenderTarget *target){
 
     this->window->clear(sf::Color::Black);
 
-    for(int i = 0; i < this->numButtons; i++){
-        this->buttons[i]->render(target);
-    }   
+    for(int i = 0; i < 4; i++){
+        for(int i = 0; i < this->numButtons; i++){
+            this->buttons[i]->render(target);
+        }   
+    }
 
     this->window->display();
 
@@ -95,6 +90,7 @@ void Sequencer::update(){
             else if(!this->buttonStates[i]){
                 this->buttonStates[i] = true;
                 this->dev->pause();
+                //this->track->addTone(i, new PCMTone("res/wavs/pp.wav",i * stepTime, (i+1) * stepTime ));
                 this->track->addTone(i, new Sine(i * stepTime, (i+1) * stepTime, 0.5, 220));
                 this->dev->setAudioObject(this->track);
                 this->dev->resume();
@@ -126,4 +122,20 @@ void Sequencer::run(){
     }
 
 
+}
+
+void Sequencer::addTrackEffect(int index, Effect *e){
+
+    //no index for now
+    this->track->addEffect(e);
+
+}
+
+void Sequencer::setTrackTone(int index, Tone *t){
+
+    this->tones.insert(std::pair<int, Tone *>(index, t));
+}
+
+void Sequencer::setStepTime(double step){
+    this->stepTime = step;
 }

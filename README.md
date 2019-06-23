@@ -6,7 +6,6 @@ Currently only supports linux sound with ALSA
 
 # TODO
 * create launcher class that will act as main window and can launch applets
-* figure out how to implement nondeterministic effects
 * refactor + commit piano applet and create more applets
 * implement knob controls
 * implement portaudio device for windows users
@@ -14,7 +13,7 @@ Currently only supports linux sound with ALSA
 * give widgets dedicated textures instead of basic colors
 * filter builder (low priority)
 * update button for arbitrary shape
-
+* fix effects 
 
 # UPDATES
 

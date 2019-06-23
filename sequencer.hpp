@@ -2,6 +2,15 @@
 #include "GUI/GUI.hpp"
 #include <chrono>
 
+#define BUTTON_WIDTH 30
+#define BUTTON_HEIGHT 20
+#define WINDOW_WIDTH 400
+#define WINDOW_HEIGHT 200
+#define SPACER 3
+#define X_OFFSET 20
+#define Y_OFFSET 20
+
+
 class seqButton;
 
 class Sequencer : public App{
@@ -11,12 +20,14 @@ public:
     Sequencer();
     ~Sequencer();
 
+    void addTrackEffect(int index, Effect *e);
+    void setTrackTone(int index, Tone *t);
 
     void update();
     void render(sf::RenderTarget *target);
     void run();
     void pause();
-
+    void setStepTime(double step);
 
 private:
 
@@ -33,6 +44,10 @@ private:
     std::chrono::duration<double> stepPeriod; 
 
     Track *track;
+
+    std::map<int, Track *> tracks;
+    std::map<int, Tone *> tones;
+
     AlsaDevice *dev;
 
 };

@@ -10,7 +10,7 @@ AUDIOSRCFILES = AlsaDevice.cpp PCMTone.cpp Sawtooth.cpp Sine.cpp Square.cpp Tria
 AUDIOSRC = $(addprefix $(addprefix $(SRCPATH), $(AUDIOPATH)), $(AUDIOSRCFILES))
 
 EFFECTPATH = Audio/Effects/
-EFFECTSRCFILES = DecayEffect.cpp Downsample.cpp FIR.cpp Reverb.cpp Tremolo.cpp Vibrato.cpp Envelope.cpp
+EFFECTSRCFILES = DecayEffect.cpp Downsample.cpp FIR.cpp Reverb.cpp Tremolo.cpp Vibrato.cpp Envelope.cpp Decimate.cpp
 EFFECTSRC  = $(addprefix $(addprefix $(SRCPATH), $(EFFECTPATH)), $(EFFECTSRCFILES))
 
 GUIPATH = GUI/
@@ -25,7 +25,7 @@ AUDIODEPS = $(addprefix $(addprefix $(INCLUDEPATH), $(AUDIOPATH)), $(AUDIODEPFIL
 GUIDEPFILES = App.hpp Button.hpp DropDownItem.hpp DropDownMenu.hpp DropDownMenuBar.hpp Knob.hpp Listener.hpp Oscilloscope.hpp Slider.hpp Widget.hpp GUI.hpp
 GUIDEPS = $(addprefix $(addprefix $(INCLUDEPATH), $(GUIPATH)), $(GUIDEPFILES))
 
-EFFECTDEPFILES = DecayEffect.hpp Downsample.hpp FIR.hpp Reverb.hpp Tremolo.hpp Vibrato.hpp Envelope.hpp
+EFFECTDEPFILES = DecayEffect.hpp Downsample.hpp FIR.hpp Reverb.hpp Tremolo.hpp Vibrato.hpp Envelope.hpp Decimate.hpp
 EFFECTDEPS = $(addprefix $(addprefix $(INCLUDEPATH), $(EFFECTPATH)), $(EFFECTDEPFILES))
 
 DEPS =  $(AUDIODEPS) $(GUIDEPS) $(EFFECTDEPS) 

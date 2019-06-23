@@ -6,12 +6,16 @@
 class Vibrato : public Effect {
 
 public:
-    Vibrato(double amplitude, double frequency, int modulation);
-    Vibrato(double amplitude, double frequency);
+    Vibrato(double amplitude, double frequency, int numTaps, int modulation);
+    Vibrato(double amplitude, double frequency, int numTaps);
+    ~Vibrato();
 
     void apply(double t, short *sample);
 
 private:
+
+    int numTaps;
+    short *taps;
 
     double frequency;
     double amplitude;

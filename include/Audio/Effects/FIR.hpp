@@ -7,14 +7,15 @@
 class FIR : public Effect{
 
 public:
-    FIR(int numberOfTaps, float *bValues);
+    FIR(int numberOfTaps, double *bValues);
+    ~FIR();
     void apply(double t, short *sample);
 
 private:
 
     int numberOfTaps;
-    float *bValues;
-    float *taps;
+    double *bValues;
+    double *taps;
 
 };
 
