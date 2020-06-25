@@ -3,18 +3,19 @@
 
 #include "Tone.hpp"
 
-class Triangle : public Tone{
+class Triangle : public Tone
+{
 
 public:
     Triangle(
         double onTime,
-        double offTime, 
-        double amplitude, 
+        double offTime,
+        double amplitude,
         int harmonics,
         double freq);
 
     ~Triangle();
-    short callback(double t);
+    short *callback(double t);
 
 private:
     double frequency;

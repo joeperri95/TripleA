@@ -3,19 +3,20 @@
 
 #include "Tone.hpp"
 
-class Square : public Tone{
+class Square : public Tone
+{
 
 public:
     Square(
         double onTime,
-        double offTime, 
-        double amplitude, 
+        double offTime,
+        double amplitude,
         int harmonics,
         double freq);
 
     ~Square();
 
-    short callback(double t);
+    short *callback(double t);
 
 private:
     double frequency;

@@ -7,25 +7,24 @@
 #include <memory.h>
 #include <iostream>
 
-class Sine : public Tone {
+class Sine : public Tone
+{
 
 public:
     Sine(
         double onTime,
-        double offTime, 
-        double amplitude, 
+        double offTime,
+        double amplitude,
         double freq);
-    
+
     Sine();
 
     ~Sine();
-    
-    short callback(double t);
+
+    short *callback(double t);
 
 private:
-
     double frequency;
-
 };
 
 #endif

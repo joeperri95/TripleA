@@ -11,26 +11,24 @@
 #endif
 
 #ifndef PI
-#define PI  3.141592653
+#define PI 3.141592653
 #endif
 
-class Tone : public AudioObject{
+class Tone : public AudioObject
+{
 
 public:
-
     Tone();
     virtual ~Tone();
 
-    virtual short callback(double t) = 0;     
+    virtual short *callback(double t) = 0;
     double getAmplitude();
     void setAmplitude(double amp);
     void addEffect(Effect *e);
 
 protected:
-
     std::vector<Effect *> effects;
     double amplitude;
-
 };
 
 #endif

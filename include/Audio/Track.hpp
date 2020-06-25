@@ -6,10 +6,10 @@
 #include "Tone.hpp"
 #include <map>
 
-class Track : public AudioObject{
+class Track : public AudioObject
+{
 
 public:
-
     Track(double length);
     Track();
     ~Track();
@@ -21,17 +21,17 @@ public:
     double getAmplitude();
     void addEffect(Effect *e);
 
-    short callback(double t);
+    short *callback(double t);
     float getPlaybackPercentage(double t);
 
 private:
-
     std::map<int, Tone *> tones;
     std::vector<Effect *> effects;
     double length;
     double amplitude;
     bool loop;
 
+    double time;
 };
 
 #endif
