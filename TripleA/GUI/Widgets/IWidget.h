@@ -4,6 +4,9 @@
 #include <SFML/Graphics.hpp>
 
 class IWidget
+/* 
+    IWidget is the base class of all widgets in the GUI subsystem
+*/
 {
 public:
     IWidget();
