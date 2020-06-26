@@ -1,28 +1,3 @@
-/.vscode/
 
-#sample songs
-/res/*
-/wavs/
-*.wav
-*.mp3
-
-#built objects
-*.o
-/obj
-app
-a.out
-run
-debug
-
-NOTES
-NOTES.md
-
-
-#data dumps
-*.csv
-
-main.cpp
-piano.cpp
-/Tests
-/Tests/*
-*.ttf
+build
+.vscode
