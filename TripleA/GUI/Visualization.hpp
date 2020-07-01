@@ -5,8 +5,8 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include "Cursor.hpp"
-#include "States/ApplicationState.h"
-#include "States/MenuState.h"
+#include "ApplicationState.h"
+#include "MenuState.h"
 
 class Visualization
 {

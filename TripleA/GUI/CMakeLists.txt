@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION "3.13.4")
-add_compile_options(-Wall -lstdc++fs)
+add_compile_options(-Wall)
 
 include_directories(../../external/json/single_include)
 
@@ -9,7 +9,7 @@ set(Sources
     main.cpp
     Application.cpp
     Visualization.cpp
-    States/MenuState.cpp
+    MenuState.cpp
     Widgets/IWidget.cpp
     Widgets/Button.cpp
 )
@@ -17,8 +17,8 @@ set(Sources
 set(Headers
     Visualization.hpp
     Application.h
-    States/ApplicationState.h
-    States/MenuState.h
+    ApplicationState.h
+    MenuState.h
     Widgets/IWidget.h
     Widgets/Button.h
 )

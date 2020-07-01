@@ -3,7 +3,6 @@
 Application::Application(int height, int width) : display(height, width)
 {
 
-    //this->state = new AngularSimulationState(this->display.getWindowHandle());
     this->state = new MenuState("layout.json");    
     this->display.setState(this->state);
 

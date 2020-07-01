@@ -3,8 +3,8 @@
 
 #include <chrono>
 #include <thread>
-#include "States/ApplicationState.h"
-#include "States/MenuState.h"
+#include "ApplicationState.h"
+#include "MenuState.h"
 #include "Visualization.hpp"
 #include "Widgets/Widgets.h"
 #include <SFML/System.hpp>

@@ -1,0 +1,12 @@
+{
+    "Widgets" : {
+        "count" : 1,
+        "list" : [
+            {
+                "type" : "Button",
+                "position" : [100, 100],
+                "name" : "test"                
+            }
+        ]       
+    }
+}

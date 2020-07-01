@@ -1,11 +1,12 @@
 #ifndef __MENU_STATE_H__
 #define __MENU_STATE_H__
 
-#include <memory>
-#include "ApplicationState.h"
-#include "../Widgets/Widgets.h"
-#include "nlohmann/json.hpp"
 #include <fstream>
+#include "ApplicationState.h"
+#include "Widgets/IWidget.h"
+#include "Widgets/Button.h"
+#include "Layouts/Layout.h"
+#include "nlohmann/json.hpp"
 
 using json = nlohmann::json;
 
@@ -28,4 +29,5 @@ private:
 
     void _initializeWidgets();
 };
+
 #endif

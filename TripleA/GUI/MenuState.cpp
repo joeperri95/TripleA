@@ -11,22 +11,21 @@ MenuState::MenuState(std::string filename)
 {
 
     //testing code
-
+    
     std::ifstream layoutFile(filename);
     
-    json rawJSON, widgetListJSON;
+    nlohmann::json rawJSON, widgetListJSON;
     layoutFile >> rawJSON;
 
     widgetListJSON = rawJSON["Widgets"];
     int numWidgets = widgetListJSON["count"];
-    std::cout << numWidgets << std::endl;
 
     for (int i = 0; i < numWidgets; i++)
     {
         if (widgetListJSON["list"][i]["type"] == "Button")
         {
-            std::cout << "bammmmm!" << std::endl;
-            this->widgets.push_back(std::shared_ptr<IWidget>(new Button));
+            std::cout << "BAMM" << std::endl;
+            this->widgets.push_back(std::shared_ptr<IWidget>((new Button())));
             auto b = (std::static_pointer_cast<Button>(this->widgets.back()));
             b->setPosition(sf::Vector2f(widgetListJSON["list"][i]["position"][0], widgetListJSON["list"][i]["position"][1]));
             b->setName(widgetListJSON["list"][i]["name"]);
@@ -40,8 +39,10 @@ MenuState::MenuState(std::string filename)
         }
     }
 
+
     this->backgroundColor = sf::Color(0xF, 0xF, 0xF);
     this->_initializeWidgets();
+
 }
 
 MenuState::~MenuState()

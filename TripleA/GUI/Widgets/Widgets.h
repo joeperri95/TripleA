@@ -8,4 +8,9 @@
 #include "IWidget.h"
 #include "Button.h"
 
+enum Widgets{
+    Button
+};
+
+
 #endif
