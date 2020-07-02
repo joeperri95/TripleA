@@ -37,6 +37,7 @@ void Button::handleEvent(sf::Event &e)
             switch (this->state)
             {
             case IDLE:
+                this->notify(button_event::ENTERED);
                 this->state = button_state::HOVER;
                 break;
             case HOVER:
@@ -60,6 +61,7 @@ void Button::handleEvent(sf::Event &e)
                 break;
             case HOVER:
                 this->state = button_state::IDLE;
+                this->notify(button_event::LEFT);
                 break;
             case PRESSED_ON:
                 this->state = button_state::PRESSED_OFF;
@@ -81,6 +83,7 @@ void Button::handleEvent(sf::Event &e)
                 break;
             case HOVER:
                 this->state = button_state::PRESSED_ON;
+                this->notify(button_event::PRESSED);
                 break;
             case PRESSED_ON:
                 this->state = button_state::PRESSED_ON;
@@ -106,10 +109,12 @@ void Button::handleEvent(sf::Event &e)
             case PRESSED_ON:
                 this->active = true;
                 this->state = button_state::HOVER;
+                this->notify(button_event::RELEASED);
                 break;
             case PRESSED_OFF:
                 this->active = true;
                 this->state = button_state::IDLE;
+                this->notify(button_event::RELEASED);
                 break;
             }
         }
@@ -118,30 +123,26 @@ void Button::handleEvent(sf::Event &e)
 
 void Button::render(sf::RenderTarget *renderer)
 {
+    this->rect.setFillColor(this->idleColor);
     renderer->draw(this->rect);
 }
 
 void Button::update()
 //this is called periodically
 {
-    if (this->active)
-    //execute function if clicked and released
-    {
-        std::cout << "clicked " << this->name << std::endl;
-        this->active = false;
-    }
 
-    if (this->state == button_state::HOVER)
+}
+
+void Button::addListener(Listener &listener, button_event event)
+{
+    this->listeners[event].push_back(listener);
+}
+
+void Button::notify(button_event event)
+{
+    for(auto it = this->listeners[event].begin(); it != this->listeners[event].end(); it++)
     {
-        rect.setFillColor(HOVER_COLOR);
-    }
-    else if (this->state == button_state::PRESSED_ON || this->state == button_state::PRESSED_OFF)
-    {
-        rect.setFillColor(CLICKED_COLOR);
-    }
-    else
-    {
-        rect.setFillColor(this->idleColor);
+        it->execute();
     }
 }
 

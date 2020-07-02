@@ -1,7 +1,7 @@
 #ifndef __LAYOUT_H__
 #define __LAYOUT_H__
 
-#include "Widgets.h"
+#include "../Widgets/Widgets.h"
 #include <vector>
 #include "nlohmann/json.hpp"
 #include <fstream>

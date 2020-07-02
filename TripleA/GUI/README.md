@@ -7,7 +7,6 @@ add widgets that I had earlier
 * dropdown
 * slider
 * knob
-add listeners that get fired on state transition
 add textures to widgets
 add the effects I had before
 * tremolo

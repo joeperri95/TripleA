@@ -10,13 +10,14 @@ class Listener{
 
 public:
     Listener();
+    Listener(std::function<void(void *)> f, void *args);
     ~Listener();
 
     void execute();
 
 
 private:
-
+    
     std::function<void(void *)> f;
     void * args;
 

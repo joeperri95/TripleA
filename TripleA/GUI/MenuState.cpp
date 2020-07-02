@@ -24,9 +24,7 @@ MenuState::MenuState(std::string filename)
     {
         if (widgetListJSON["list"][i]["type"] == "Button")
         {
-            std::cout << "BAMM" << std::endl;
-            this->widgets.push_back(std::shared_ptr<IWidget>((new Button())));
-            auto b = (std::static_pointer_cast<Button>(this->widgets.back()));
+            Button *b = new Button();
             b->setPosition(sf::Vector2f(widgetListJSON["list"][i]["position"][0], widgetListJSON["list"][i]["position"][1]));
             b->setName(widgetListJSON["list"][i]["name"]);
 
@@ -36,6 +34,8 @@ MenuState::MenuState(std::string filename)
             {
                 b->setSize(widgetListJSON["list"][i]["size"][0], widgetListJSON["list"][i]["size"][1]);
             }
+
+            this->widgets.push_back(std::shared_ptr<IWidget>((IWidget *)(b)));
         }
     }
 
@@ -103,4 +103,23 @@ void MenuState::handleEvent(sf::Event &e)
 void MenuState::_initializeWidgets()
 //add widgets
 {
+    Button *b = new Button();
+    this->widgets.push_back(std::shared_ptr<IWidget>((IWidget *)b));
+    b->setPosition(sf::Vector2f(200, 200));
+    b->setName("name");
+    
+    Listener l1([](void * args){std::cout << "Pressed" << std::endl;}, nullptr);
+    b->addListener(l1, button_event::PRESSED);
+    Listener l2([](void * args){std::cout << "Released" << std::endl;}, nullptr);
+    b->addListener(l2, button_event::RELEASED);
+    Listener l3([](void * args)
+    {
+        ((Button *) args)->idleColor = sf::Color::Green;
+    }, b);
+    b->addListener(l3, button_event::ENTERED);
+    Listener l4([](void * args)
+    {
+        ((Button *) args)->idleColor = sf::Color::Yellow;
+    }, b);
+    b->addListener(l4, button_event::LEFT);
 }
