@@ -5,7 +5,6 @@
 add layout functions to create a layout from a json file
 add widgets that I had earlier
 * dropdown
-* slider
 * knob
 add textures to widgets
 add the effects I had before
@@ -16,7 +15,7 @@ add the effects I had before
 ## Later
 
 OpenGL state
-Connect with the audio half
+Connect GUI with the audio half
 Add music based widgets
 Add other effects
 Create simple gui builder

@@ -13,6 +13,7 @@ set(Sources
     Widgets/IWidget.cpp
     Widgets/Button.cpp
     Widgets/Listener.cpp
+    Widgets/Slider.cpp
 )
 
 set(Headers
@@ -23,7 +24,9 @@ set(Headers
     Widgets/IWidget.h
     Widgets/Button.h
     Widgets/Listener.h
+    Widgets/Slider.h
 )
+
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 add_executable(simulation ${Sources} ${Headers})

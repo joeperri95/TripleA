@@ -29,7 +29,7 @@ MenuState::MenuState(std::string filename)
             b->setName(widgetListJSON["list"][i]["name"]);
 
             if (widgetListJSON["list"][i]["idlecolor"] != nullptr)
-                b->idleColor = sf::Color(widgetListJSON["list"][i]["idlecolor"][0], widgetListJSON["list"][i]["idlecolor"][1], widgetListJSON["list"][i]["idlecolor"][2]);
+                b->setBackgroundColour(sf::Color(widgetListJSON["list"][i]["idlecolor"][0], widgetListJSON["list"][i]["idlecolor"][1], widgetListJSON["list"][i]["idlecolor"][2]));
             if (widgetListJSON["list"][i]["size"] != nullptr)
             {
                 b->setSize(widgetListJSON["list"][i]["size"][0], widgetListJSON["list"][i]["size"][1]);
@@ -85,6 +85,7 @@ void MenuState::handleEvent(sf::Event &e)
         switch (e.key.code)
         {
         case sf::Keyboard::Escape:
+            this->closing = true;
             break;
         default:
             break;
@@ -107,19 +108,27 @@ void MenuState::_initializeWidgets()
     this->widgets.push_back(std::shared_ptr<IWidget>((IWidget *)b));
     b->setPosition(sf::Vector2f(200, 200));
     b->setName("name");
-    
-    Listener l1([](void * args){std::cout << "Pressed" << std::endl;}, nullptr);
-    b->addListener(l1, button_event::PRESSED);
-    Listener l2([](void * args){std::cout << "Released" << std::endl;}, nullptr);
-    b->addListener(l2, button_event::RELEASED);
+
+    Listener l1([](void * args){
+        std::cout << "Pressed" << std::endl;
+        ((Button *) args)->setBackgroundColour(sf::Color::Red);
+    }, b);
+    b->addListener(l1, button_event::BUTTON_PRESSED);
+    Listener l2([](void * args){
+        std::cout << "Released" << std::endl;
+        ((Button *) args)->setBackgroundColour(sf::Color::Red);
+    }, b);
+    b->addListener(l2, button_event::BUTTON_RELEASED);
     Listener l3([](void * args)
     {
-        ((Button *) args)->idleColor = sf::Color::Green;
+        ((Button *) args)->setBackgroundColour( sf::Color::Green);
     }, b);
-    b->addListener(l3, button_event::ENTERED);
+    b->addListener(l3, button_event::BUTTON_ENTERED);
     Listener l4([](void * args)
     {
-        ((Button *) args)->idleColor = sf::Color::Yellow;
+        ((Button *) args)->setBackgroundColour(sf::Color(0x3F, 0x3F, 0x3F));
     }, b);
-    b->addListener(l4, button_event::LEFT);
+    b->addListener(l4, button_event::BUTTON_LEFT);
+
+    this->addWidget(std::shared_ptr<IWidget>((IWidget *) new Slider<int>()));
 }

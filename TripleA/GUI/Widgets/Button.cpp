@@ -2,19 +2,14 @@
 
 Button::Button()
 {
-    this->state = button_state::IDLE;
-    this->active = false;
+    this->state = button_state::BUTTON_IDLE;
     this->name = "btn";
 
     //temporary delete this later
     this->size = sf::Vector2f(50, 25);
-#define IDLE_COLOR sf::Color::Yellow
-#define HOVER_COLOR sf::Color::Blue
-#define CLICKED_COLOR sf::Color::Red
-    this->rect.setFillColor(IDLE_COLOR);
+    this->rect.setFillColor(sf::Color(0x3F, 0x3F, 0x3F));
     //end
 
-    this->idleColor = IDLE_COLOR;
     this->rect.setSize(this->size);
 }
 
@@ -36,18 +31,18 @@ void Button::handleEvent(sf::Event &e)
         {
             switch (this->state)
             {
-            case IDLE:
-                this->notify(button_event::ENTERED);
-                this->state = button_state::HOVER;
+            case BUTTON_IDLE:
+                this->notify(button_event::BUTTON_ENTERED);
+                this->state = button_state::BUTTON_HOVER;
                 break;
-            case HOVER:
-                this->state = button_state::HOVER;
+            case BUTTON_HOVER:
+                this->state = button_state::BUTTON_HOVER;
                 break;
-            case PRESSED_ON:
-                this->state = button_state::PRESSED_ON;
+            case BUTTON_PRESSED_ON:
+                this->state = button_state::BUTTON_PRESSED_ON;
                 break;
-            case PRESSED_OFF:
-                this->state = button_state::PRESSED_ON;
+            case BUTTON_PRESSED_OFF:
+                this->state = button_state::BUTTON_PRESSED_ON;
                 break;
             }
         }
@@ -56,18 +51,18 @@ void Button::handleEvent(sf::Event &e)
 
             switch (this->state)
             {
-            case IDLE:
-                this->state = button_state::IDLE;
+            case BUTTON_IDLE:
+                this->state = button_state::BUTTON_IDLE;
                 break;
-            case HOVER:
-                this->state = button_state::IDLE;
-                this->notify(button_event::LEFT);
+            case BUTTON_HOVER:
+                this->state = button_state::BUTTON_IDLE;
+                this->notify(button_event::BUTTON_LEFT);
                 break;
-            case PRESSED_ON:
-                this->state = button_state::PRESSED_OFF;
+            case BUTTON_PRESSED_ON:
+                this->state = button_state::BUTTON_PRESSED_OFF;
                 break;
-            case PRESSED_OFF:
-                this->state = button_state::PRESSED_OFF;
+            case BUTTON_PRESSED_OFF:
+                this->state = button_state::BUTTON_PRESSED_OFF;
                 break;
             }
         }
@@ -78,18 +73,18 @@ void Button::handleEvent(sf::Event &e)
         {
             switch (this->state)
             {
-            case IDLE:
-                this->state = button_state::IDLE;
+            case BUTTON_IDLE:
+                this->state = button_state::BUTTON_IDLE;
                 break;
-            case HOVER:
-                this->state = button_state::PRESSED_ON;
-                this->notify(button_event::PRESSED);
+            case BUTTON_HOVER:
+                this->state = button_state::BUTTON_PRESSED_ON;
+                this->notify(button_event::BUTTON_PRESSED);
                 break;
-            case PRESSED_ON:
-                this->state = button_state::PRESSED_ON;
+            case BUTTON_PRESSED_ON:
+                this->state = button_state::BUTTON_PRESSED_ON;
                 break;
-            case PRESSED_OFF:
-                this->state = button_state::PRESSED_OFF;
+            case BUTTON_PRESSED_OFF:
+                this->state = button_state::BUTTON_PRESSED_OFF;
                 break;
             }
         }
@@ -100,21 +95,19 @@ void Button::handleEvent(sf::Event &e)
         {
             switch (this->state)
             {
-            case IDLE:
-                this->state = button_state::IDLE;
+            case BUTTON_IDLE:
+                this->state = button_state::BUTTON_IDLE;
                 break;
-            case HOVER:
-                this->state = button_state::HOVER;
+            case BUTTON_HOVER:
+                this->state = button_state::BUTTON_HOVER;
                 break;
-            case PRESSED_ON:
-                this->active = true;
-                this->state = button_state::HOVER;
-                this->notify(button_event::RELEASED);
+            case BUTTON_PRESSED_ON:
+                this->state = button_state::BUTTON_HOVER;
+                this->notify(button_event::BUTTON_RELEASED);
                 break;
-            case PRESSED_OFF:
-                this->active = true;
-                this->state = button_state::IDLE;
-                this->notify(button_event::RELEASED);
+            case BUTTON_PRESSED_OFF:
+                this->state = button_state::BUTTON_IDLE;
+                this->notify(button_event::BUTTON_RELEASED);
                 break;
             }
         }
@@ -123,7 +116,6 @@ void Button::handleEvent(sf::Event &e)
 
 void Button::render(sf::RenderTarget *renderer)
 {
-    this->rect.setFillColor(this->idleColor);
     renderer->draw(this->rect);
 }
 
@@ -144,6 +136,11 @@ void Button::notify(button_event event)
     {
         it->execute();
     }
+}
+
+void Button::setBackgroundColour(sf::Color colour)
+{
+    this->rect.setFillColor(colour);
 }
 
 void Button::setSize(int width, int height)

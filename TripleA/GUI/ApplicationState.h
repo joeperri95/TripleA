@@ -14,8 +14,10 @@ public:
     virtual void render(sf::RenderTarget *renderer) = 0;
     virtual void update() = 0;
 
+    virtual bool isClosing(){return this->closing;}
+
 protected:
-    bool closing;
+    bool closing = false;
 };
 
 #endif

@@ -11,6 +11,14 @@ class Listener{
 public:
     Listener();
     Listener(std::function<void(void *)> f, void *args);
+    /*
+        This can be instantiated easily using a lambda
+        Listener l([](void * args)
+        {
+            //code body using args
+        }, args);
+    */
+    
     ~Listener();
 
     void execute();

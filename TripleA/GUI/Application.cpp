@@ -24,10 +24,11 @@ void Application::update()
     this->state->update();
     this->display.render();
     this->display.handleEvents();
-    if (!this->display.isOpen())
+    if (!this->display.isOpen() || this->state->isClosing())
     {
         this->running = false;
     }
+
 }
 
 void Application::_applicationLoop(void *args)

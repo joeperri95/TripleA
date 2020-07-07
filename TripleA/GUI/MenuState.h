@@ -5,6 +5,7 @@
 #include <fstream>
 #include "ApplicationState.h"
 #include "Widgets/Button.h"
+#include "Widgets/Slider.h"
 #include "nlohmann/json.hpp"
 
 using json = nlohmann::json;
